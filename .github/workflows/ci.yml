@@ -3,7 +3,7 @@ name: CI
 on: [push, pull_request]
 
 env: # Define environment variables here
-  NODE_VERSION: 20
+  # NODE_VERSION: 20
   # PNPM_VERSION: 6 # Replace with the version of pnpm you want to use
   DATABASE_URL: http://database.url
 
