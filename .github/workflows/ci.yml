@@ -22,7 +22,7 @@ jobs:
       #     node-version: ${{ env.NODE_VERSION }}
 
       - name: Install dependencies
-        run: pnpm add
+        run: pnpm i
 
       - name: Run TypeScript type checking
         run: pnpm run typecheck
