@@ -2,9 +2,7 @@ name: CI
 
 on: [push, pull_request]
 
-env: # Define environment variables here
-  # NODE_VERSION: 20
-  # PNPM_VERSION: 6 # Replace with the version of pnpm you want to use
+env:
   DATABASE_URL: http://database.url
 
 jobs:
@@ -14,11 +12,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v2
-      #   with:
-      #     node-version: '14.x'
 
       - name: Install pnpm
         run: npm install -g pnpm
