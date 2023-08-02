@@ -4,7 +4,7 @@ This is going to be the plan for this particular application
 
 ## Features
 
-- [ ] get authentication with oauth (because I dont know it)
+- [ ] get authentication with Auth0 (because I dont know it)
 - [ ] use drizzle for database (Because I've never seen it)
 - [ ] use a AWS S3 for storage (I've never used it)
 - [ ] use sqlite (because it's free)
