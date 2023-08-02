@@ -4,14 +4,14 @@ This is going to be the plan for this particular application
 
 ## Features
 
-- [ ] get authentication with Auth0 (because I dont know it)
+- [x] Using clerk as as authentication provider
 - [ ] use drizzle for database (Because I've never seen it)
 - [ ] use a AWS S3 for storage (I've never used it)
 - [ ] use sqlite (because it's free)
 
 ## Todos
 
-- [ ] create a login page
+- [x] create a login page
 - [ ] a place to upload a photo
 - [ ] Have a model for the database
 - [ ] a place to view the photo
