@@ -13,6 +13,7 @@ This is going to be the plan for this particular application
 
 - [x] create a login page
 - [ ] a place to upload a photo
+  - [ ] add a upload component that will return the uploaded photo
 - [ ] Have a model for the database
 - [ ] a place to view the photo
 - [ ] Maybe when a photo is uploaded, it will create a small version and large version of the photo. maybe the small version can have a watermark
