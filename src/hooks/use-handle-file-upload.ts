@@ -30,34 +30,10 @@ export const useHandleFileUpload = () => {
     }
   }
 
-  const handleFileSubmit = async () => {
-    // event.preventDefault()
-    if (selectedFiles.length > 0) {
-      try {
-        // Implement your image upload logic here
-        // You can use 'selectedFiles' to access the uploaded files and send them to the server.
-        // For example, you can use the 'fetch' API or any other method to send the files to the server.
-        // Don't forget to handle any response from the server (success or error).
-        // Also, you can reset the component state after the upload is complete.
-
-        // Reset the component state after successful upload
-
-        console.log('SUBMITTED_FILES', selectedFiles)
-
-        setSelectedFiles([])
-        setPreviewImages([])
-      } catch (error) {
-        // Handle the error from the server
-        console.error('Error uploading images:', error)
-      }
-    }
-  }
-
   return {
     selectedFiles,
     previewImages,
     handleFileChange,
     resetFilesInput,
-    handleFileSubmit,
   }
 }

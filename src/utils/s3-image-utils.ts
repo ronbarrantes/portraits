@@ -29,7 +29,7 @@ interface S3File {
   buffer: Buffer
 }
 
-const uploadFilesToS3 = async (
+export const uploadFilesToS3 = async (
   files: S3File[],
   bucketName: string,
 ): Promise<string[]> => {
