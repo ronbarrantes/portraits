@@ -2,6 +2,7 @@
 
 import { UserButton } from '@clerk/nextjs'
 
+import { ImageUpload } from '@/components/ImageUpload'
 // import { users } from '@/db/schema'
 import { db, UsersTable } from '../db/drizzle'
 
@@ -19,9 +20,10 @@ export default async function Home() {
   // console.log(allUsers)
 
   return (
-    <main className="flex flex-col items-center justify-between min-h-screen p-24">
+    <main className="flex flex-col items-center justify-between min-h-screen p-24 border border-green-500">
       <div>
         <UserButton afterSignOutUrl="/" />
+        <ImageUpload />
       </div>
     </main>
   )
