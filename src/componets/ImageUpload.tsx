@@ -1,38 +1,58 @@
 'use client'
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 
-export const ImageUpload = () => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
-  const [previewImage, setPreviewImage] = useState<string | null>(null)
+const useHandleFileChange = () => {
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([])
+  const [previewImages, setPreviewImages] = useState<string[]>([])
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
-    if (file) {
-      setSelectedFile(file)
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setPreviewImage(reader.result as string)
-      }
-      reader.readAsDataURL(file)
+    const files = event.target.files
+    if (files) {
+      const fileArray = Array.from(files)
+      setSelectedFiles(fileArray)
+
+      const readerArray: FileReader[] = []
+      fileArray.forEach((file) => {
+        const reader = new FileReader()
+        reader.onloadend = () => {
+          setPreviewImages((prevImages) => [
+            ...new Set([...prevImages, reader.result as string]),
+          ])
+        }
+
+        reader.readAsDataURL(file)
+        readerArray.push(reader)
+      })
     }
   }
 
+  const resetFilesInput = () => {
+    setSelectedFiles([])
+    setPreviewImages([])
+  }
+
+  return { selectedFiles, previewImages, handleFileChange, resetFilesInput }
+}
+
+export const ImageUpload = () => {
+  const { selectedFiles, previewImages, handleFileChange, resetFilesInput } =
+    useHandleFileChange()
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (selectedFile) {
+    if (selectedFiles.length > 0) {
       try {
         // Implement your image upload logic here
-        // You can use 'selectedFile' to access the uploaded file and send it to the server.
-        // For example, you can use the 'fetch' API or any other method to send the file to the server.
+        // You can use 'selectedFiles' to access the uploaded files and send them to the server.
+        // For example, you can use the 'fetch' API or any other method to send the files to the server.
         // Don't forget to handle any response from the server (success or error).
         // Also, you can reset the component state after the upload is complete.
 
         // Reset the component state after successful upload
-        setSelectedFile(null)
-        setPreviewImage(null)
+        resetFilesInput()
       } catch (error) {
         // Handle the error from the server
-        console.error('Error uploading image:', error)
+        console.error('Error uploading images:', error)
       }
     }
   }
@@ -44,17 +64,22 @@ export const ImageUpload = () => {
           <input
             type="file"
             accept="image/*"
+            multiple
             onChange={handleFileChange}
-            placeholder="upload image"
+            placeholder="Upload images"
           />
         </div>
-        {previewImage && (
+        {previewImages.length > 0 && (
           <div>
-            <img
-              src={previewImage}
-              alt="Preview"
-              style={{ maxWidth: '200px', maxHeight: '200px' }}
-            />
+            {previewImages.map((previewImage, index) => (
+              <div key={index}>
+                <img
+                  src={previewImage}
+                  alt={`Preview ${index}`}
+                  style={{ maxWidth: '200px', maxHeight: '200px' }}
+                />
+              </div>
+            ))}
           </div>
         )}
         <button type="submit">Upload</button>
