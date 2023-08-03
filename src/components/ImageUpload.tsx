@@ -3,10 +3,11 @@
 
 // import Image from 'next/image'
 
+import { Form } from 'aws-sdk/clients/amplifyuibuilder'
+
 import { PostImages } from '@/app/actions/image-upload'
 import { useHandleFileUpload } from '@/hooks/use-handle-file-upload'
 import { fileToBuffer } from '@/utils/file-to-buffer'
-import { S3File, uploadFilesToS3, uploadToS3 } from '@/utils/s3-image-utils'
 
 interface ImageUploadProps {
   postImages: PostImages
@@ -16,8 +17,8 @@ export const ImageUpload = ({ postImages }: ImageUploadProps) => {
   const { previewImages, selectedFiles, handleFileChange, resetFilesInput } =
     useHandleFileUpload()
 
-  const handleSubmit = async () => {
-    // event.preventDefault()
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
     if (selectedFiles.length > 0) {
       try {
         // Implement your image upload logic here
@@ -30,16 +31,18 @@ export const ImageUpload = ({ postImages }: ImageUploadProps) => {
 
         const images = await Promise.all(
           selectedFiles.map(async (file) => {
-            const buffer = await fileToBuffer(file)
+            const bufferStr = (await fileToBuffer(file)).toString('base64')
             return {
               name: file.name,
-              buffer,
+              bufferStr: bufferStr,
             }
           }),
         )
 
         try {
-          await uploadFilesToS3(images, process.env.S3_BUCKET_NAME!)
+          // await uploadFilesToS3(images)
+          const image = await postImages(images)
+          console.log('THE IMAGE STUFF ===>>>', image)
           console.log('ALL WENT WELL')
         } catch (error) {
           console.log('TOOK A DUMP')

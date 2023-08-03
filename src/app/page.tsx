@@ -23,8 +23,6 @@ export default async function Home() {
 
   // uploadToS3()
 
-  // postImages()
-
   return (
     <main className="flex flex-col items-center justify-between min-h-screen p-24 border border-green-500">
       <div>

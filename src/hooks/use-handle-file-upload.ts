@@ -7,6 +7,8 @@ export const useHandleFileUpload = () => {
   const resetFilesInput = () => {
     setSelectedFiles([])
     setPreviewImages([])
+
+    console.log('CLEAR')
   }
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
