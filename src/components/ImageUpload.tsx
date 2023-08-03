@@ -1,13 +1,15 @@
 'use client'
-import React, { ChangeEvent, FormEvent, useState } from 'react'
+// import React from 'react'
 
-import Image from 'next/image'
+// import Image from 'next/image'
 
-import { PostImagesFn } from '@/app/actions/image-upload'
+import { PostImages } from '@/app/actions/image-upload'
 import { useHandleFileUpload } from '@/hooks/use-handle-file-upload'
+import { fileToBuffer } from '@/utils/file-to-buffer'
+import { S3File, uploadFilesToS3, uploadToS3 } from '@/utils/s3-image-utils'
 
 interface ImageUploadProps {
-  postImages: PostImagesFn
+  postImages: PostImages
 }
 
 export const ImageUpload = ({ postImages }: ImageUploadProps) => {
@@ -26,7 +28,24 @@ export const ImageUpload = ({ postImages }: ImageUploadProps) => {
 
         // Reset the component state after successful upload
 
-        await postImages(selectedFiles)
+        const images = await Promise.all(
+          selectedFiles.map(async (file) => {
+            const buffer = await fileToBuffer(file)
+            return {
+              name: file.name,
+              buffer,
+            }
+          }),
+        )
+
+        try {
+          await uploadFilesToS3(images, process.env.S3_BUCKET_NAME!)
+          console.log('ALL WENT WELL')
+        } catch (error) {
+          console.log('TOOK A DUMP')
+        }
+
+        // await postImages(images)
 
         console.log('SUBMITTED_FILES', selectedFiles)
         resetFilesInput()

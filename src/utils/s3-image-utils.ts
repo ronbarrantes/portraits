@@ -5,6 +5,11 @@ import AWS from 'aws-sdk'
 // upload multiples images to s3 bucket
 // return a list of urls
 
+export interface S3File {
+  name: string
+  buffer: Buffer
+}
+
 export const uploadToS3 = async (/*file: File*/) => {
   // const formData = new FormData()
   // formData.append('file', file)
@@ -23,11 +28,6 @@ export const uploadToS3 = async (/*file: File*/) => {
 }
 
 // S3_BUCKET_NAME
-
-interface S3File {
-  name: string
-  buffer: Buffer
-}
 
 export const uploadFilesToS3 = async (
   files: S3File[],
