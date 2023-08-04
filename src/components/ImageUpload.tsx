@@ -1,4 +1,5 @@
 'use client'
+import { postImages } from '@actions/image-upload'
 import { extname } from 'path'
 
 import { PostImages } from '@/app/actions/image-upload'
@@ -6,10 +7,10 @@ import { useHandleFileUpload } from '@/hooks/use-handle-file-upload'
 import { fileToBuffer } from '@/utils/file-to-buffer'
 
 interface ImageUploadProps {
-  postImages: PostImages
+  // postImages: PostImages
 }
 
-export const ImageUpload = ({ postImages }: ImageUploadProps) => {
+export const ImageUpload = ({}: ImageUploadProps) => {
   const { previewImages, selectedFiles, handleFileChange, resetFilesInput } =
     useHandleFileUpload()
 
