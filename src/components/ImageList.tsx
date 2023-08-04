@@ -1,8 +1,6 @@
 'use client'
 import { AddImageToDB } from '@/app/actions/image-upload'
-import { ImageUpload } from '@/components/ImageUpload'
-import { init, seed } from '@/db/init'
-import { db, ImageTable, ImageTableType } from '@/db/schema'
+import { ImageTableType } from '@/db/schema'
 
 interface ImageListProps {
   images: ImageTableType[]
@@ -14,9 +12,6 @@ export const ImageList = async ({ images, addImageToDB }: ImageListProps) => {
 
   return (
     <>
-      <h1>List</h1>
-      <div>stuff</div>
-
       <button onClick={() => addImageToDB()}>Add To DB</button>
     </>
   )
