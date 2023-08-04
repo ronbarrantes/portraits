@@ -1,12 +1,13 @@
 import {
   PutObjectCommand,
   PutObjectCommandInput,
+  // Put
   S3Client,
 } from '@aws-sdk/client-s3'
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 
 interface S3File {
   name: string
-  // bufferStr: string
   buffer: Buffer | string
 }
 
@@ -22,50 +23,18 @@ export const s3FileUpload = async (
     Bucket: bucket,
     Key: s3File.name,
     Body: s3File.buffer,
+    ContentType: 'image/jpg', // seems to be working for for png and jpg
   }
 
   const command = new PutObjectCommand(commands)
 
   try {
-    const response = await client.send(command)
-    return response
+    await client.send(command)
+    const url = (
+      await getSignedUrl(client, command, { expiresIn: 3600 })
+    ).split('?')[0]
+    return { url }
   } catch (err) {
     console.error(err)
   }
 }
-
-/**
- 
-{
-  "Version": "2012-10-17",
-  "Id": "AccessControl",
-  "Statement": [
-    {
-      "Sid": "AllowSSLRequestsOnly",
-      "Effect": "Deny",
-      "Principal": "*",
-      "Action": "s3:*",
-      "Resource": [
-              "arn:aws:s3:::cdk-hnb659fds-assets-927439201317-us-west-2",
-              "arn:aws:s3:::cdk-hnb659fds-assets-927439201317-us-west-2/*"
-            ],
-            "Condition": {
-              "Bool": {
-                "aws:SecureTransport": "false"
-              }
-            }
-          },
-          {
-            "Sid": "PublicReadGetObject",
-            "Effect": "Allow",
-            "Principal": "*",
-            "Action": "s3:GetObject",
-            "Resource": [
-              "arn:aws:s3:::cdk-hnb659fds-assets-927439201317-us-west-2",
-              "arn:aws:s3:::cdk-hnb659fds-assets-927439201317-us-west-2/*"
-            ]
-          }
-        ]
-      }
-      
-      */
