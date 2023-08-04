@@ -4,6 +4,8 @@ import {
   S3Client,
 } from '@aws-sdk/client-s3'
 
+import { MAX_FILE_SIZE } from '@/constants/max-file-size'
+
 interface S3File {
   name: string
   buffer: Buffer | string
@@ -24,6 +26,7 @@ export const s3FileUpload = async (
     Key: s3File.name,
     Body: s3File.buffer,
     ContentType: 'image/jpg', // seems to be working for for png and jpg
+    ContentLength: MAX_FILE_SIZE,
   }
 
   const command = new PutObjectCommand(commands)

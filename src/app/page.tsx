@@ -21,7 +21,7 @@ export default async function Home() {
     <main className="flex flex-col items-center justify-between min-h-screen p-24 border border-green-500">
       <div>
         <UserButton afterSignOutUrl="/" />
-        <ImageUpload />
+        {/* <ImageUpload /> */}
       </div>
     </main>
   )
