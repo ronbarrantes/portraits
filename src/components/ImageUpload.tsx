@@ -1,8 +1,4 @@
 'use client'
-// import React from 'react'
-
-// import Image from 'next/image'
-
 import { extname } from 'path'
 
 import { PostImages } from '@/app/actions/image-upload'
@@ -34,7 +30,8 @@ export const ImageUpload = ({ postImages }: ImageUploadProps) => {
             const bufferStr = (await fileToBuffer(file)).toString('base64')
             console.log('EXT', extname(file.name))
             return {
-              fileType: extname(file.name),
+              // fileType: extname(file.name),
+              name: file.name,
               bufferStr,
             }
           }),
@@ -48,8 +45,6 @@ export const ImageUpload = ({ postImages }: ImageUploadProps) => {
         } catch (error) {
           console.log('TOOK A DUMP')
         }
-
-        // await postImages(images)
 
         console.log('SUBMITTED_FILES', selectedFiles)
         resetFilesInput()

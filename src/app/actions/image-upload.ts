@@ -19,16 +19,12 @@ const s3BucketInfo = {
 const client = new S3Client(s3BucketInfo.config)
 
 export const postImages = async (
-  s3Files: { bufferStr: string; fileType: string }[],
+  s3Files: { bufferStr: string; name: string }[],
 ) => {
-  console.log('S3 FILES name -->>', s3Files[0].fileType)
-
-  const uid = customAlphabet(alphabet, 10)
-
   try {
     const fileUploaded = await s3FileUpload(
       {
-        name: `${uid}${s3Files[0].fileType}`,
+        name: s3Files[0].name,
         buffer: Buffer.from(s3Files[0].bufferStr, 'base64'),
       },
       client,
