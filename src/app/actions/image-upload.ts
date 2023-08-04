@@ -1,4 +1,6 @@
 'use server'
+import { revalidatePath } from 'next/cache'
+
 import { S3Client } from '@aws-sdk/client-s3'
 import { customAlphabet, urlAlphabet } from 'nanoid'
 
@@ -52,9 +54,12 @@ export const addImageToDB = async () => {
     .returning()
 
   console.log('IMAGE ADDED TO DB', image)
+
+  revalidatePath('/')
 }
 
 export type PostImages = typeof postImages
+export type AddImageToDB = typeof addImageToDB
 
 // get an image from s3 bucket
 // returns a url

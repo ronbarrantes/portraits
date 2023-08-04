@@ -1,27 +1,15 @@
-import { addImageToDB } from '@/app/actions/image-upload'
+'use client'
+import { AddImageToDB } from '@/app/actions/image-upload'
 import { ImageUpload } from '@/components/ImageUpload'
 import { init, seed } from '@/db/init'
-import { db, ImageTable } from '@/db/schema'
+import { db, ImageTable, ImageTableType } from '@/db/schema'
 
-export const ImageList = async () => {
-  let images
-  // let startTime = Date.now()
-  try {
-    images = await db.select().from(ImageTable)
-  } catch (e: any) {
-    console.log('ERROR ------>>>>>', e.message)
-    if (e.message === `relation "images" does not exist`) {
-      console.log(
-        'Table does not exist, creating and seeding it with dummy data now...',
-      )
+interface ImageListProps {
+  images: ImageTableType[]
+  addImageToDB: AddImageToDB
+}
 
-      await init()
-      images = await db.select().from(ImageTable)
-    } else {
-      throw e
-    }
-  }
-
+export const ImageList = async ({ images, addImageToDB }: ImageListProps) => {
   console.log('IMAGES', images)
 
   return (
@@ -29,7 +17,7 @@ export const ImageList = async () => {
       <h1>List</h1>
       <div>stuff</div>
 
-      <button onClick={addImageToDB}>Add To DB</button>
+      <button onClick={() => addImageToDB()}>Add To DB</button>
     </>
   )
 }
