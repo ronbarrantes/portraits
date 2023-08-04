@@ -1,33 +1,35 @@
-// import Image from 'next/image'
-
-import { postImages } from '@actions/image-upload'
 import { UserButton } from '@clerk/nextjs'
 
+import { ImageList } from '@/components/ImageList'
 import { ImageUpload } from '@/components/ImageUpload'
-// import { uploadToS3 } from '@/utils/s3-image-utils'
-// import { users } from '@/db/schema'
-import { db, UsersTable } from '../db/drizzle'
+import { init, seed } from '@/db/init'
+import { db, ImageTable } from '@/db/schema'
+import { addImageToDB } from './actions/image-upload'
 
 export default async function Home() {
-  // const db = drizzle(sql)
-
-  // const allUsers = await db.select().from(UsersTable)
-  // const allUsers = await db.select().from(users)
-
-  // const client = postgres(connectionString)
-  // const db = drizzle(client)
-
-  // const allUsers = await db.select().from(users)
-
-  // console.log(allUsers)
-
-  // uploadToS3()
+  let images
+  // let startTime = Date.now()
+  try {
+    images = await db.select().from(ImageTable)
+  } catch (e: any) {
+    console.log('ERROR ------>>>>>', e.message)
+    if (e.message === `relation "images" does not exist`) {
+      console.log(
+        'Table does not exist, creating and seeding it with dummy data now...',
+      )
+      await init()
+      images = await db.select().from(ImageTable)
+    } else {
+      throw e
+    }
+  }
 
   return (
     <main className="flex flex-col items-center justify-between min-h-screen p-24 border border-green-500">
       <div>
         <UserButton afterSignOutUrl="/" />
-        <ImageUpload postImages={postImages} />
+        {/* <ImageUpload /> */}
+        <ImageList images={images} addImageToDB={addImageToDB} />
       </div>
     </main>
   )
