@@ -62,7 +62,7 @@ export const ImageUpload = ({}: ImageUploadProps) => {
             className="hidden"
             onChange={handleFileChange}
             placeholder="Upload images"
-            max={MAX_FILE_SIZE}
+            // max={MAX_FILE_SIZE}
             // title="Upload images"
           />
           <label

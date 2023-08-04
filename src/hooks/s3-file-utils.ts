@@ -26,7 +26,7 @@ export const s3FileUpload = async (
     Key: s3File.name,
     Body: s3File.buffer,
     ContentType: 'image/jpg', // seems to be working for for png and jpg
-    ContentLength: MAX_FILE_SIZE,
+    // ContentLength: MAX_FILE_SIZE,
   }
 
   const command = new PutObjectCommand(commands)
