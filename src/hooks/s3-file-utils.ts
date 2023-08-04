@@ -16,7 +16,6 @@ export const s3FileUpload = async (
   bucket: string,
 ) => {
   // I wanna return the file location
-
   // return the location of the file
 
   const commands: PutObjectCommandInput = {
@@ -34,3 +33,39 @@ export const s3FileUpload = async (
     console.error(err)
   }
 }
+
+/**
+ 
+{
+  "Version": "2012-10-17",
+  "Id": "AccessControl",
+  "Statement": [
+    {
+      "Sid": "AllowSSLRequestsOnly",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": "s3:*",
+      "Resource": [
+              "arn:aws:s3:::cdk-hnb659fds-assets-927439201317-us-west-2",
+              "arn:aws:s3:::cdk-hnb659fds-assets-927439201317-us-west-2/*"
+            ],
+            "Condition": {
+              "Bool": {
+                "aws:SecureTransport": "false"
+              }
+            }
+          },
+          {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": [
+              "arn:aws:s3:::cdk-hnb659fds-assets-927439201317-us-west-2",
+              "arn:aws:s3:::cdk-hnb659fds-assets-927439201317-us-west-2/*"
+            ]
+          }
+        ]
+      }
+      
+      */
