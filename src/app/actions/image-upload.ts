@@ -1,54 +1,51 @@
 'use server'
-// import { S3File, uploadFilesToS3 } from '@/utils/s3-image-utils'
+import { S3Client } from '@aws-sdk/client-s3'
+import { customAlphabet, urlAlphabet } from 'nanoid'
 
-import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
-import {
-  AbortMultipartUploadCommandOutput,
-  S3,
-  S3ClientConfig,
-} from '@aws-sdk/client-s3'
-
+import { alphabet } from '@/constants/customAlphabet'
 import { s3FileUpload } from '@/hooks/s3-file-utils'
-// import { Upload } from '@aws-sdk/lib-storage'
-import { fileToBuffer } from '@/utils/file-to-buffer'
-// import multer from 'multer';
-// import multerS3 from 'multer-s3';
 
-// upload multiples images to s3 bucket
-// return a list of urls
-
-interface S3File {
-  name: string
-  bufferStr: string
-  // buffer: Buffer
-}
-
-const config: S3ClientConfig = {
-  region: process.env.AWS_REGION,
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+const s3BucketInfo = {
+  bucketName: process.env.AWS_S3_BUCKET_NAME as string,
+  config: {
+    region: process.env.AWS_REGION,
+    credentials: {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID as string,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY as string,
+    },
   },
 }
 
-export const uploadToS3 = async (/*file: File*/) => {
-  // const formData = new FormData()
-  // formData.append('file', file)
-  // formData.append('upload_preset', 'dev_setups')
-  // const response = await fetch(
-  //   'https://api.cloudinary.com/v1_1/dkqercqjg/image/upload',
-  //   {
-  //     method: 'POST',
-  //     body: formData,
-  //   }
-  // )
-  // const data = await response.json()
-  // return data.secure_url
+const client = new S3Client(s3BucketInfo.config)
 
-  console.log('S3 BUCKET', process.env.S3_BUCKET_NAME)
+export const postImages = async (
+  s3Files: { bufferStr: string; fileType: string }[],
+) => {
+  console.log('S3 FILES name -->>', s3Files[0].fileType)
+
+  const uid = customAlphabet(alphabet, 10)
+
+  try {
+    const fileUploaded = await s3FileUpload(
+      {
+        name: `${uid}${s3Files[0].fileType}`,
+        buffer: Buffer.from(s3Files[0].bufferStr, 'base64'),
+      },
+      client,
+      s3BucketInfo.bucketName,
+    )
+
+    console.log('FILE UPLOADED', fileUploaded)
+
+    return fileUploaded
+  } catch (error) {
+    console.error('SOMETHING WENT WRONG', error)
+  }
+  if (s3Files.length === 0) {
+  }
 }
 
-// S3_BUCKET_NAME
+export type PostImages = typeof postImages
 
 // get an image from s3 bucket
 // returns a url
@@ -61,36 +58,3 @@ export const uploadToS3 = async (/*file: File*/) => {
 
 // delete multiple images from s3 bucket
 // return a confirmation
-
-// get image
-
-// post image
-
-const client = new S3Client(config)
-
-export const postImages = async (s3Files: S3File[]) => {
-  // console.log('IMAGES', s3Files)
-
-  console.log('S3 FILES name -->>', s3Files[0].name)
-
-  try {
-    return s3FileUpload(
-      {
-        name: `${s3Files[0].name}`,
-        buffer: Buffer.from(s3Files[0].bufferStr, 'base64'),
-      },
-      client,
-      process.env.AWS_S3_BUCKET_NAME!,
-    )
-  } catch (error) {
-    console.error('SOMETHING WENT WRONG', error)
-  }
-  if (s3Files.length === 0) {
-  }
-}
-
-// export type PostImagesFn = (files: File[]) => Promise<void>
-
-export type PostImages = typeof postImages
-
-// delete image

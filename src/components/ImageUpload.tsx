@@ -3,7 +3,7 @@
 
 // import Image from 'next/image'
 
-import { Form } from 'aws-sdk/clients/amplifyuibuilder'
+import { extname } from 'path'
 
 import { PostImages } from '@/app/actions/image-upload'
 import { useHandleFileUpload } from '@/hooks/use-handle-file-upload'
@@ -32,15 +32,16 @@ export const ImageUpload = ({ postImages }: ImageUploadProps) => {
         const images = await Promise.all(
           selectedFiles.map(async (file) => {
             const bufferStr = (await fileToBuffer(file)).toString('base64')
+            console.log('EXT', extname(file.name))
             return {
-              name: file.name,
-              bufferStr: bufferStr,
+              fileType: extname(file.name),
+              bufferStr,
             }
           }),
         )
 
         try {
-          // await uploadFilesToS3(images)
+          console.log('THE IMAGE STUFF ===>>>', images)
           const image = await postImages(images)
           console.log('THE IMAGE STUFF ===>>>', image)
           console.log('ALL WENT WELL')
@@ -66,7 +67,7 @@ export const ImageUpload = ({ postImages }: ImageUploadProps) => {
         <div>
           <input
             type="file"
-            accept="image/*"
+            accept="image/png, image/jpeg, image/jpg"
             name="images-upload"
             id="image-upload"
             multiple
