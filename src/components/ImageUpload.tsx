@@ -16,7 +16,7 @@ export const ImageUpload = ({ postImages }: ImageUploadProps) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (selectedFiles.length > 0) {
-      // TODO: need to make this work for multiple images
+      // TODO: need to make this work for multiple images or files
       try {
         // Implement your image upload logic here
         // You can use 'selectedFiles' to access the uploaded files and send them to the server.
