@@ -16,22 +16,12 @@ export const ImageUpload = ({ postImages }: ImageUploadProps) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (selectedFiles.length > 0) {
-      // TODO: need to make this work for multiple images
       try {
-        // Implement your image upload logic here
-        // You can use 'selectedFiles' to access the uploaded files and send them to the server.
-        // For example, you can use the 'fetch' API or any other method to send the files to the server.
-        // Don't forget to handle any response from the server (success or error).
-        // Also, you can reset the component state after the upload is complete.
-
-        // Reset the component state after successful upload
-
         const images = await Promise.all(
           selectedFiles.map(async (file) => {
             const bufferStr = (await fileToBuffer(file)).toString('base64')
             console.log('EXT', extname(file.name))
             return {
-              // fileType: extname(file.name),
               name: file.name,
               bufferStr,
             }
