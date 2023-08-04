@@ -3,6 +3,7 @@ import { S3Client } from '@aws-sdk/client-s3'
 import { customAlphabet, urlAlphabet } from 'nanoid'
 
 import { alphabet } from '@/constants/customAlphabet'
+import { db, ImageTable } from '@/db/schema'
 import { s3FileUpload } from '@/hooks/s3-file-utils'
 
 const s3BucketInfo = {
@@ -39,6 +40,18 @@ export const postImages = async (
   }
   if (s3Files.length === 0) {
   }
+}
+
+export const addImageToDB = async () => {
+  const image = await db
+    .insert(ImageTable)
+    .values({
+      url: 'other stuff',
+      user: 'ronb',
+    })
+    .returning()
+
+  console.log('IMAGE ADDED TO DB', image)
 }
 
 export type PostImages = typeof postImages
