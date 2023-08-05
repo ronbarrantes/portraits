@@ -28,8 +28,9 @@ export default async function Home() {
     <main className="flex flex-col items-center justify-between min-h-screen p-24 border border-green-500">
       <div>
         <UserButton afterSignOutUrl="/" />
+        <p>Hello world</p>
         {/* <ImageUpload /> */}
-        <ImageList images={images} addImageToDB={addImageToDB} />
+        {/* <ImageList images={images} addImageToDB={addImageToDB} /> */}
       </div>
     </main>
   )
