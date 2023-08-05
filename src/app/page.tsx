@@ -2,9 +2,42 @@ import { UserButton } from '@clerk/nextjs'
 
 import { ImageList } from '@/components/ImageList'
 import { ImageUpload } from '@/components/ImageUpload'
-import { init, seed } from '@/db/init'
+import { init } from '@/db/init'
 import { db, ImageTable } from '@/db/schema'
 import { addImageToDB } from './actions/image-upload'
+
+// MAKE A INIT COMPONENT
+
+// MAKE A CONTENT COMPONENT
+
+interface PageLayoutProps {
+  children: React.ReactNode
+}
+
+const PageLayout = ({ children }: PageLayoutProps) => {
+  return (
+    <div className="flex flex-col items-center justify-between min-h-screen p-24 border border-green-500">
+      <header>
+        <span>Portrait app</span>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <a href="/">Generated</a>
+              </li>
+
+              <li>
+                <a href="/">Dashboard</a>
+              </li>
+            </ul>
+          </nav>
+          <UserButton afterSignOutUrl="/" />
+        </div>
+      </header>
+      <main>{children}</main>
+    </div>
+  )
+}
 
 export default async function Home() {
   let images
@@ -25,12 +58,10 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex flex-col items-center justify-between min-h-screen p-24 border border-green-500">
-      <div>
-        <UserButton afterSignOutUrl="/" />
-        {/* <ImageUpload /> */}
-        <ImageList images={images} addImageToDB={addImageToDB} />
-      </div>
-    </main>
+    <PageLayout>
+      <h1>Hello world</h1>
+      {/* <ImageUpload /> */}
+      {/* <ImageList images={images} addImageToDB={addImageToDB} /> */}
+    </PageLayout>
   )
 }
