@@ -1,49 +1,19 @@
 import { UserButton } from '@clerk/nextjs'
 
-import { ImageList } from '@/components/ImageList'
-import { ImageUpload } from '@/components/ImageUpload'
+import { ImageList } from '@components/ImageList'
+import { ImageUpload } from '@components/ImageUpload'
+import { PageLayout } from '@components/PageLayout'
 import { init } from '@/db/init'
 import { db, ImageTable } from '@/db/schema'
 import { addImageToDB } from './actions/image-upload'
 
 // MAKE A INIT COMPONENT
 
-// MAKE A CONTENT COMPONENT
-
-interface PageLayoutProps {
-  children: React.ReactNode
-}
-
-const PageLayout = ({ children }: PageLayoutProps) => {
-  return (
-    <div className="flex flex-col items-center justify-between min-h-screen p-24 border border-green-500">
-      <header>
-        <span>Portrait app</span>
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <a href="/">Generated</a>
-              </li>
-
-              <li>
-                <a href="/dashboard">Dashboard</a>
-              </li>
-            </ul>
-          </nav>
-          <UserButton afterSignOutUrl="/" />
-        </div>
-      </header>
-      <main>{children}</main>
-    </div>
-  )
-}
-
 export default async function Home() {
   let images
   // let startTime = Date.now()
   try {
-    images = await db.select().from(ImageTable)
+    images = await db.select().from(ImageTable).limit(1)
   } catch (e: any) {
     console.log('ERROR ------>>>>>', e.message)
     if (e.message === `relation "images" does not exist`) {
