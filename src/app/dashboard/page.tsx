@@ -4,7 +4,6 @@ import { ImageList } from '@/components/ImageList'
 import { ImageUpload } from '@/components/ImageUpload'
 import { init } from '@/db/init'
 import { db, ImageTable } from '@/db/schema'
-import { addImageToDB } from './actions/image-upload'
 
 // MAKE A INIT COMPONENT
 
