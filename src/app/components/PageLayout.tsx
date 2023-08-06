@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import { UserButton } from '@clerk/nextjs'
 
 interface PageLayoutProps {
@@ -6,25 +8,37 @@ interface PageLayoutProps {
 
 export const PageLayout = ({ children }: PageLayoutProps) => {
   return (
-    <div className="flex flex-col items-center justify-between min-h-screen p-24 border border-green-500">
-      <header>
+    <div className="flex flex-col items-center min-h-screen">
+      <header className="flex items-center justify-between w-full p-1 sm:max-w-6xl">
         <span>Portrait app</span>
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <a href="/">Generated</a>
-              </li>
+        <nav className="flex items-center">
+          <ul className="flex items-center gap-2">
+            <li>
+              <Link
+                className="p-3 py-1 border border-white rounded-md"
+                href="/"
+              >
+                Generated
+              </Link>
+            </li>
 
-              <li>
-                <a href="/dashboard">Dashboard</a>
-              </li>
-            </ul>
-          </nav>
-          <UserButton afterSignOutUrl="/" />
-        </div>
+            <li>
+              <Link
+                className="p-3 py-1 border border-white rounded-md"
+                href="/dashboard"
+              >
+                Dashboard
+              </Link>
+            </li>
+          </ul>
+          <div className="ml-3 w-9 h-9 ">
+            <UserButton afterSignOutUrl="/" />
+          </div>
+        </nav>
       </header>
-      <main>{children}</main>
+      <main className="flex items-center justify-between w-full p-1 border border-red-500 sm:max-w-6xl">
+        {children}
+      </main>
     </div>
   )
 }
