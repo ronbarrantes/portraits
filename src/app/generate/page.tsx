@@ -6,10 +6,10 @@ import { PageLayout } from '@components/PageLayout'
 
 // MAKE A CONTENT COMPONENT
 
-export default async function Home() {
+export default async function Generate() {
   return (
     <PageLayout>
-      <h1>Dashboard</h1>
+      <h1>Generate</h1>
       {/* <ImageUpload /> */}
       {/* <ImageList images={images} addImageToDB={addImageToDB} /> */}
     </PageLayout>
