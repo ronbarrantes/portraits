@@ -39,7 +39,7 @@ export const PageLayout = ({ children }: PageLayoutProps) => {
         <Link href="/">Portrait app</Link>
         <MainNav />
       </header>
-      <main className="flex flex-col items-center justify-between w-full p-1 border border-red-500 sm:max-w-6xl">
+      <main className="flex flex-col items-center justify-between w-full gap-5 p-1 border border-red-500 sm:max-w-6xl">
         {children}
       </main>
     </div>
