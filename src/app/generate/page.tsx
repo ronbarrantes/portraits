@@ -7,23 +7,7 @@ import { PageLayout } from '@components/PageLayout'
 // MAKE A CONTENT COMPONENT
 
 export default async function Generate() {
-  const images = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-  ]
+  const images = ['1', '2', '3', '4', '5']
 
   return (
     <PageLayout>
