@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <Init />
+      {/* <Init /> */}
       <html lang="en">
         <body className={inter.className}>{children}</body>
       </html>

@@ -8,9 +8,9 @@ export async function init() {
   CREATE TABLE IF NOT EXISTS "images" (
     "id" serial PRIMARY KEY NOT NULL,
     "user" text NOT NULL,
-    "img_url" text NOT NULL,
-    "img_url_small" text NOT NULL,
-    "created_at" timestamp DEFAULT now()
+    "imgUrl" text NOT NULL,
+    "imgUrlSmall" text NOT NULL,
+    "createdAt" timestamp DEFAULT now()
   );`
 
   console.log(`Created "images" table`)
@@ -28,9 +28,9 @@ export async function seed() {
   CREATE TABLE IF NOT EXISTS "images" (
     "id" serial PRIMARY KEY NOT NULL,
     "user" text NOT NULL,
-    "img_url" text NOT NULL,
-    "img_url_small" text NOT NULL,
-    "created_at" timestamp DEFAULT now()
+    "imgUrl" text NOT NULL,
+    "imgUrlSmall" text NOT NULL,
+    "createdAt" timestamp DEFAULT now()
   );`
 
   console.log(`Created "images" table`)

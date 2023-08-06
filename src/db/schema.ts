@@ -12,9 +12,9 @@ import { drizzle } from 'drizzle-orm/vercel-postgres'
 export const ImageTable = pgTable('images', {
   id: serial('id').primaryKey().notNull(),
   user: text('user').notNull(),
-  imgUrl: text('img_url').notNull(),
-  imgUrlSmall: text('img_url_small').notNull(),
-  createdAt: timestamp('created_at').defaultNow(),
+  imgUrl: text('imgUrl').notNull(),
+  imgUrlSmall: text('imgUrlSmall').notNull(),
+  createdAt: timestamp('createdAt').defaultNow(),
 })
 
 export type ImageTableType = InferModel<typeof ImageTable>
