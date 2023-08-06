@@ -1,37 +1,53 @@
-import { UserButton } from '@clerk/nextjs'
+import { PageLayout } from '@components/PageLayout'
 
-import { ImageList } from '@/components/ImageList'
-import { ImageUpload } from '@/components/ImageUpload'
-import { init, seed } from '@/db/init'
-import { db, ImageTable } from '@/db/schema'
-import { addImageToDB } from './actions/image-upload'
+// MAKE A INIT COMPONENT
 
-export default async function Home() {
-  let images
-  // let startTime = Date.now()
-  try {
-    images = await db.select().from(ImageTable)
-  } catch (e: any) {
-    console.log('ERROR ------>>>>>', e.message)
-    if (e.message === `relation "images" does not exist`) {
-      console.log(
-        'Table does not exist, creating and seeding it with dummy data now...',
-      )
-      await init()
-      images = await db.select().from(ImageTable)
-    } else {
-      throw e
-    }
-  }
+export default async function Dashboard() {
+  // an array just to show images
+  const images = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+  ]
 
   return (
-    <main className="flex flex-col items-center justify-between min-h-screen p-24 border border-green-500">
+    <PageLayout>
+      {
+        // I need a form
+        // I need a place to show images
+        // add a nav
+      }
+
+      <ul className="flex gap-2">
+        <li>Upload Image</li>
+        <li>Generate Image</li>
+        <li>Personal Images</li>
+      </ul>
+
       <div>
-        <UserButton afterSignOutUrl="/" />
-        <p>Hello world</p>
-        {/* <ImageUpload /> */}
-        {/* <ImageList images={images} addImageToDB={addImageToDB} /> */}
+        <ul className="flex flex-wrap">
+          {images.map((image, idx) => (
+            <li
+              className="flex items-center justify-center w-20 h-20 border border-white"
+              key={idx}
+            >
+              {image}
+            </li>
+          ))}
+        </ul>
       </div>
-    </main>
+    </PageLayout>
   )
 }

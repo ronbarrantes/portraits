@@ -4,13 +4,13 @@ import { db, ImageTable, ImageTableType } from '@/db/schema'
 
 export async function init() {
   // Create table with raw SQL
-
   const createTable = await sql`
   CREATE TABLE IF NOT EXISTS "images" (
     "id" serial PRIMARY KEY NOT NULL,
     "user" text NOT NULL,
-    "url" text NOT NULL,
-    "created_at" timestamp DEFAULT now()
+    "imgUrl" text NOT NULL,
+    "imgUrlSmall" text NOT NULL,
+    "createdAt" timestamp DEFAULT now()
   );`
 
   console.log(`Created "images" table`)
@@ -28,8 +28,9 @@ export async function seed() {
   CREATE TABLE IF NOT EXISTS "images" (
     "id" serial PRIMARY KEY NOT NULL,
     "user" text NOT NULL,
-    "url" text NOT NULL,
-    "created_at" timestamp DEFAULT now()
+    "imgUrl" text NOT NULL,
+    "imgUrlSmall" text NOT NULL,
+    "createdAt" timestamp DEFAULT now()
   );`
 
   console.log(`Created "images" table`)
@@ -38,7 +39,8 @@ export async function seed() {
     .insert(ImageTable)
     .values([
       {
-        url: 'https://ronb.co',
+        imgUrl: 'https://ronb.co',
+        imgUrlSmall: 'https://ronb.co',
         user: 'ronb',
       },
     ])
