@@ -1,9 +1,9 @@
 'use client'
 import { AddImageToDB } from '@/app/actions/image-upload'
-import { ImageTableType } from '@/db/schema'
+import { Image } from '@/db/schema'
 
 interface ImageListProps {
-  images: ImageTableType[]
+  images: Image[]
   addImageToDB: AddImageToDB
 }
 

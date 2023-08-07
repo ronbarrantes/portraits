@@ -1,6 +1,6 @@
 import { sql } from '@vercel/postgres'
 
-import { db, ImageTable, ImageTableType } from '@/db/schema'
+import { db, ImageTable, Image } from '@/db/schema'
 
 export async function init() {
   // Create table with raw SQL
@@ -35,7 +35,7 @@ export async function seed() {
 
   console.log(`Created "images" table`)
 
-  const createImages: ImageTableType[] = await db
+  const createImages: Image[] = await db
     .insert(ImageTable)
     .values([
       {

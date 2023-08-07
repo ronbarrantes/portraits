@@ -17,7 +17,7 @@ export const ImageTable = pgTable('images', {
   createdAt: timestamp('createdAt').defaultNow(),
 })
 
-export type ImageTableType = InferModel<typeof ImageTable>
+export type Image = InferModel<typeof ImageTable>
 export type NewImage = InferModel<typeof ImageTable, 'insert'>
 
 // Connect to Vercel Postgres
