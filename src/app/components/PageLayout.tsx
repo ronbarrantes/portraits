@@ -26,7 +26,14 @@ export const MainNav = () => {
         </li>
       </ul>
       <div className="ml-3 w-9 h-9 ">
-        <UserButton afterSignOutUrl="/" />
+        <UserButton
+          appearance={{
+            elements: {
+              avatarBox: 'w-9 h-9', // THIS IS HOW TO CONTROL THE SIZE
+            },
+          }}
+          afterSignOutUrl="/"
+        />
       </div>
     </nav>
   )
