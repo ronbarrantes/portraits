@@ -1,31 +1,36 @@
 import Link from 'next/link'
 
 import { UserButton } from '@clerk/nextjs'
+import classNames from 'classnames'
+
+import { Logo } from '@/ui/Logo'
 
 interface PageLayoutProps {
   children: React.ReactNode
 }
 
+const LinkButton = ({ href, children }: { href: string; children: string }) => (
+  <Link
+    href={href}
+    className="pb-0.5 hover:border-b-2 border-transparent hover:border-violet-600 hover:text-violet-600 disabled:!bg-rose-900"
+    // disabled:!bg-rose-900
+  >
+    {children}
+  </Link>
+)
+
 export const MainNav = () => {
   return (
     <nav className="flex items-center">
-      <ul className="flex items-center gap-2">
+      <ul className="flex items-center gap-3">
         <li>
-          <Link className="p-3 py-1 border border-white rounded-md" href="/">
-            Dashboard
-          </Link>
+          <LinkButton href="/">Dashboard</LinkButton>
         </li>
-
         <li>
-          <Link
-            className="p-3 py-1 border border-white rounded-md"
-            href="/generate"
-          >
-            Generate
-          </Link>
+          <LinkButton href="/generate">Generate</LinkButton>
         </li>
       </ul>
-      <div className="ml-3 w-9 h-9 ">
+      <div className="ml-3 w-9 h-9">
         <UserButton
           appearance={{
             elements: {
@@ -42,8 +47,10 @@ export const MainNav = () => {
 export const PageLayout = ({ children }: PageLayoutProps) => {
   return (
     <div className="flex flex-col items-center min-h-screen">
-      <header className="flex items-center justify-between w-full p-1 sm:max-w-6xl">
-        <Link href="/">Portrait app</Link>
+      <header className="flex items-center justify-between w-full p-4 sm:max-w-6xl">
+        <Link href="/" aria-label="Portrait app logo">
+          <Logo />
+        </Link>
         <MainNav />
       </header>
       <main className="flex flex-col items-center justify-between w-full gap-5 p-1 border border-red-500 sm:max-w-6xl">
