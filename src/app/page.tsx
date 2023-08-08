@@ -1,33 +1,40 @@
+import { UserButton } from '@clerk/nextjs'
+
 import { PageLayout } from '@components/PageLayout'
 
 // MAKE A INIT COMPONENT
 
-export default async function Dashboard() {
-  // an array just to show images
-  const images = ['1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2']
+// MAKE A CONTENT COMPONENT
+
+export default async function Generate() {
+  const images = ['1', '2', '3', '4', '5']
 
   return (
     <PageLayout>
-      {
-        // I need a form
-        // I need a place to show images
-        // add a nav
-      }
+      {/*Add a form with a button and an input*/}
 
-      <ul className="flex gap-2">
-        <li>Upload Image</li>
-        <li>Generate Image</li>
-        <li>Personal Images</li>
-      </ul>
+      <form className="flex gap-1">
+        <button
+          type="submit"
+          className="p-3 py-1 border border-white rounded-l-md"
+        >
+          Generate
+        </button>
+        <input
+          className="p-3 py-1 border border-white rounded-r-md bg-slate-800"
+          placeholder="Generate your image..."
+          type="text"
+        />
+      </form>
 
-      <div className="w-full h-full ">
-        <ul className="flex flex-wrap ">
+      <div>
+        <ul className="flex flex-wrap">
           {images.map((image, idx) => (
             <li
-              className="flex items-center justify-center w-1/2 h-fit sm:w-1/4 md:w-1/6"
+              className="flex items-center justify-center w-20 h-20 border border-white"
               key={idx}
             >
-              <div className="flex w-40 h-40 m-2 bg-red-500">{}</div>
+              {image}
             </li>
           ))}
         </ul>
