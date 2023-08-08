@@ -1,6 +1,6 @@
 import { sql } from '@vercel/postgres'
 
-import { db, ImageTable, Image } from '@/db/schema'
+import { db, Image, ImageTable } from '@/db/schema'
 
 export async function init() {
   // Create table with raw SQL
