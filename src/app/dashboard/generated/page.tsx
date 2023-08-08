@@ -1,4 +1,4 @@
-import { DashboardLayout, PageLayout } from '@components/PageLayout'
+import { DashboardLayout, PageLayout } from '@/app/components/layouts'
 
 // MAKE A INIT COMPONENT
 
