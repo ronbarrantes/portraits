@@ -12,7 +12,7 @@ interface PageLayoutProps {
 const LinkButton = ({ href, children }: { href: string; children: string }) => (
   <Link
     href={href}
-    className="pb-0.5 hover:border-b-2 border-transparent hover:border-violet-600 hover:text-violet-600 disabled:!bg-rose-900"
+    className="pb-0.5 hover:border-b-2 border-transparent hover:border-violet-500 hover:text-violet-500 disabled:!bg-rose-900"
     // disabled:!bg-rose-900
   >
     {children}
@@ -53,7 +53,7 @@ export const PageLayout = ({ children }: PageLayoutProps) => {
         </Link>
         <MainNav />
       </header>
-      <main className="flex flex-col items-center justify-between w-full gap-5 p-1 border border-red-500 sm:max-w-6xl">
+      <main className="flex flex-col items-center justify-between w-full gap-5 p-1 sm:max-w-6xl">
         {children}
       </main>
     </div>

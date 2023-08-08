@@ -4,23 +4,7 @@ import { PageLayout } from '@components/PageLayout'
 
 export default async function Dashboard() {
   // an array just to show images
-  const images = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-  ]
+  const images = ['1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2']
 
   return (
     <PageLayout>
@@ -36,14 +20,14 @@ export default async function Dashboard() {
         <li>Personal Images</li>
       </ul>
 
-      <div>
-        <ul className="flex flex-wrap">
+      <div className="w-full h-full ">
+        <ul className="flex flex-wrap ">
           {images.map((image, idx) => (
             <li
-              className="flex items-center justify-center w-20 h-20 border border-white"
+              className="flex items-center justify-center w-1/2 h-fit sm:w-1/4 md:w-1/6"
               key={idx}
             >
-              {image}
+              <div className="flex w-40 h-40 m-2 bg-red-500">{}</div>
             </li>
           ))}
         </ul>
