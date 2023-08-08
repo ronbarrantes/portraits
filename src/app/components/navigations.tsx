@@ -45,13 +45,10 @@ export const DashboardNav = () => {
     <nav className="flex items-center">
       <ul className="flex items-center gap-3">
         <li>
-          <LinkButton href="/">main</LinkButton>
+          <LinkButton href="/dashboard">uploaded</LinkButton>
         </li>
         <li>
-          <LinkButton href="/dashboard">dashboard</LinkButton>
-        </li>
-        <li>
-          <LinkButton href="/generate">generate</LinkButton>
+          <LinkButton href="/dashboard/generated">generate</LinkButton>
         </li>
       </ul>
     </nav>
