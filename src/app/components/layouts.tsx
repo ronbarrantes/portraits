@@ -25,9 +25,9 @@ export const PageLayout = ({ children }: PageLayoutProps) => {
 
 export const DashboardLayout = ({ children }: PageLayoutProps) => {
   return (
-    <div className="border border-red-500">
+    <>
       <DashboardNav />
       {children}
-    </div>
+    </>
   )
 }
