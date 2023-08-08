@@ -1,4 +1,5 @@
-import { PageLayout } from '@components/PageLayout'
+import { DashboardLayout, PageLayout } from '@components/PageLayout'
+import { DashboardNav } from '../components/navigations'
 
 // MAKE A INIT COMPONENT
 
@@ -13,15 +14,8 @@ export default async function Dashboard() {
         // I need a place to show images
         // add a nav
       }
-
-      <ul className="flex gap-2">
-        <li>Upload Image</li>
-        <li>Generate Image</li>
-        <li>Personal Images</li>
-      </ul>
-
-      <div className="w-full h-full ">
-        <ul className="flex flex-wrap ">
+      <DashboardLayout>
+        <ul className="flex flex-wrap w-full h-full">
           {images.map((image, idx) => (
             <li
               className="flex items-center justify-center w-1/2 h-fit sm:w-1/4 md:w-1/6"
@@ -31,7 +25,7 @@ export default async function Dashboard() {
             </li>
           ))}
         </ul>
-      </div>
+      </DashboardLayout>
     </PageLayout>
   )
 }

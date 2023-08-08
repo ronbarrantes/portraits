@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import { Logo } from '@/ui/Logo'
-import { MainNav } from './Nav'
+import { DashboardNav, MainNav } from './navigations'
 
 interface PageLayoutProps {
   children: React.ReactNode
@@ -19,6 +19,15 @@ export const PageLayout = ({ children }: PageLayoutProps) => {
       <main className="flex flex-col items-center justify-between w-full gap-5 p-1 sm:max-w-6xl">
         {children}
       </main>
+    </div>
+  )
+}
+
+export const DashboardLayout = ({ children }: PageLayoutProps) => {
+  return (
+    <div className="border border-red-500">
+      <DashboardNav />
+      {children}
     </div>
   )
 }
