@@ -1,4 +1,4 @@
-import { NavItem } from '@/ui/NavBar'
+import { NavItem } from '@ui'
 
 export const mainNavItems: NavItem[] = [
   {

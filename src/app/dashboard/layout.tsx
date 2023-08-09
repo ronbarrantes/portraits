@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
+import { NavBar } from '@ui'
 import { PageLayout } from '@components/layouts'
-import { NavBar } from '@/ui/NavBar'
 import { dashboardNavItems } from '../client/navigation'
 
 // const inter = Inter({ subsets: ['latin'] })

@@ -2,9 +2,9 @@ import Link from 'next/link'
 
 import { UserButton } from '@clerk/nextjs'
 
+import { Logo } from '@ui'
+import { NavBar } from '@ui'
 import { mainNavItems } from '@/app/client/navigation'
-import { Logo } from '@/ui/Logo'
-import { NavBar } from '@/ui/NavBar'
 
 interface PageLayoutProps {
   children: React.ReactNode
