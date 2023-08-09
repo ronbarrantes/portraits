@@ -18,6 +18,11 @@ export type S3Image = Exclude<
   undefined
 >
 
+export type S3ImageMulti = Exclude<
+  UnwrapPromise<ReturnType<typeof s3FileUploadMulti>>,
+  undefined
+>
+
 export const s3FileUpload = async (
   s3File: S3File,
   client: S3Client,
@@ -59,6 +64,7 @@ export const s3FileUploadMulti = async (
     return {
       key: largeImage.key,
       keySmall: smallImage.key,
+      success: true,
     }
   } catch (err) {
     console.error(err)

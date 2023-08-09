@@ -6,7 +6,11 @@ import { S3Client } from '@aws-sdk/client-s3'
 
 import { s3BucketInfo } from '@/constants/s3-bucket-info'
 import { db, ImageTable } from '@/db/schema'
-import { s3FileUpload, s3FileUploadMulti, S3Image } from '@/hooks/s3-file-utils'
+import {
+  s3FileUpload,
+  s3FileUploadMulti,
+  S3ImageMulti,
+} from '@/hooks/s3-file-utils'
 
 const client = new S3Client(s3BucketInfo.config)
 
@@ -19,7 +23,11 @@ export const postImages = async (
     imageData = await Promise.all(
       s3Files.map(
         async (s3File) =>
-          await s3FileUpload(
+          await s3FileUploadMulti(
+            {
+              key: s3File.key,
+              buffer: Buffer.from(s3File.bufferStr, 'base64'),
+            },
             {
               key: s3File.key,
               buffer: Buffer.from(s3File.bufferStr, 'base64'),
@@ -30,28 +38,16 @@ export const postImages = async (
       ),
     )
 
-    /// add images to database
+    const processedImageForDB = imageData.map((image) => {
+      if (!image) throw new Error('Something went wrong with the upload')
+      return {
+        user: userId,
+        key: image.key,
+        keySmall: image.keySmall,
+      }
+    })
 
-    // filter for images that only have a key and a success of true
-
-    const processedImageForDB = imageData
-      .filter((image: S3Image | undefined): image is S3Image => {
-        return image && image.success && image.key ? true : false
-      })
-      .map((image: S3Image) => {
-        return {
-          user: userId,
-          key: image.key,
-          keySmall: image.key,
-        }
-      })
-
-    const fileUploaded = await db
-      .insert(ImageTable)
-      .values(processedImageForDB)
-      .returning()
-
-    return fileUploaded
+    return await db.insert(ImageTable).values(processedImageForDB).returning()
   } catch (error) {
     console.error('SOMETHING WENT WRONG', error)
   }
