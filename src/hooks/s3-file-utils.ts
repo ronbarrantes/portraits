@@ -7,7 +7,7 @@ import {
 import { MAX_FILE_SIZE } from '@/constants/max-file-size'
 
 interface S3File {
-  name: string
+  key: string
   buffer: Buffer | string
 }
 
@@ -23,7 +23,7 @@ export const s3FileUpload = async (
 ) => {
   const commands: PutObjectCommandInput = {
     Bucket: bucket,
-    Key: s3File.name,
+    Key: s3File.key,
     Body: s3File.buffer,
     ContentType: 'image/jpg', // seems to be working for for png and jpg
     // ContentLength: MAX_FILE_SIZE,
@@ -36,7 +36,7 @@ export const s3FileUpload = async (
     const url =
       s3URLGenerator_ThisShouldBeATempFunctionPleaseFindABetterOptionJustInCase(
         bucket,
-        s3File.name,
+        s3File.key,
       )
 
     return url

@@ -24,7 +24,7 @@ export const ImageUpload = ({}: ImageUploadProps) => {
             const bufferStr = (await fileToBuffer(file)).toString('base64')
             console.log('EXT', extname(file.name))
             return {
-              name: file.name,
+              key: file.name,
               bufferStr,
             }
           }),
