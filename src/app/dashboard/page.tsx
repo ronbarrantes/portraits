@@ -1,4 +1,3 @@
-import { DashboardLayout, PageLayout } from '@/app/components/layouts'
 import { DashboardNav } from '../components/navigations'
 
 // MAKE A INIT COMPONENT

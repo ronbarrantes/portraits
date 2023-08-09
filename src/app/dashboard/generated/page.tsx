@@ -1,5 +1,3 @@
-import { DashboardLayout, PageLayout } from '@/app/components/layouts'
-
 // MAKE A INIT COMPONENT
 
 export default async function Dashboard() {

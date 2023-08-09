@@ -22,12 +22,3 @@ export const PageLayout = ({ children }: PageLayoutProps) => {
     </div>
   )
 }
-
-export const DashboardLayout = ({ children }: PageLayoutProps) => {
-  return (
-    <>
-      <DashboardNav />
-      {children}
-    </>
-  )
-}

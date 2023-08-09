@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import { DashboardLayout, PageLayout } from '../components/layouts'
+import { PageLayout } from '../components/layouts'
 import { DashboardNav } from '../components/navigations'
 
 // const inter = Inter({ subsets: ['latin'] })
