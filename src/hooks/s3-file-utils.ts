@@ -11,11 +11,6 @@ interface S3File {
   buffer: Buffer | string
 }
 
-const s3URLGenerator_ThisShouldBeATempFunctionPleaseFindABetterOptionJustInCase =
-  (bucket: string, key: string) => {
-    return `https://${bucket}.s3.amazonaws.com/${key}`
-  }
-
 export const s3FileUpload = async (
   s3File: S3File,
   client: S3Client,
@@ -33,13 +28,11 @@ export const s3FileUpload = async (
 
   try {
     await client.send(command)
-    const url =
-      s3URLGenerator_ThisShouldBeATempFunctionPleaseFindABetterOptionJustInCase(
-        bucket,
-        s3File.key,
-      )
-
-    return url
+    const result = {
+      key: s3File.key,
+      success: true,
+    }
+    return result
   } catch (err) {
     console.error(err)
   }
