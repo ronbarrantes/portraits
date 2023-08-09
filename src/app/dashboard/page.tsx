@@ -1,4 +1,4 @@
-import { DashboardNav } from '../components/navigations'
+import { DashboardNav } from '../components/navigation'
 
 // MAKE A INIT COMPONENT
 

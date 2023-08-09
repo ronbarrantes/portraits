@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import { Logo } from '@/ui/Logo'
-import { DashboardNav, MainNav } from './navigations'
+import { DashboardNav, MainNav } from './navigation'
 
 interface PageLayoutProps {
   children: React.ReactNode
