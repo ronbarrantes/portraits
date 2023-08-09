@@ -11,17 +11,17 @@ module.exports = {
         // 'import/no-duplicates': 'error',
         // 'unused-imports/no-unused-imports-ts': 'error',
 
-        'no-unused-vars': 'off', // or "@typescript-eslint/no-unused-vars": "off",
-        'unused-imports/no-unused-imports': 'error',
-        'unused-imports/no-unused-vars': [
-          'warn',
-          {
-            vars: 'all',
-            varsIgnorePattern: '^_',
-            args: 'after-used',
-            argsIgnorePattern: '^_',
-          },
-        ],
+        // 'no-unused-vars': 'off', // or "@typescript-eslint/no-unused-vars": "off",
+        // 'unused-imports/no-unused-imports': 'error',
+        // 'unused-imports/no-unused-vars': [
+        //   'warn',
+        //   {
+        //     vars: 'all',
+        //     varsIgnorePattern: '^_',
+        //     args: 'after-used',
+        //     argsIgnorePattern: '^_',
+        //   },
+        // ],
 
         'simple-import-sort/imports': [
           'error',
