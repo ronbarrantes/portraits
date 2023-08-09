@@ -22,12 +22,12 @@ const s3BucketInfo = {
 const client = new S3Client(s3BucketInfo.config)
 
 export const postImages = async (
-  s3Files: { bufferStr: string; name: string }[],
+  s3Files: { bufferStr: string; key: string }[],
 ) => {
   try {
     const fileUploaded = await s3FileUpload(
       {
-        name: s3Files[0].name,
+        key: s3Files[0].key,
         buffer: Buffer.from(s3Files[0].bufferStr, 'base64'),
       },
       client,
@@ -49,8 +49,8 @@ export const addImageToDB = async () => {
     .insert(ImageTable)
     .values({
       user: '12345678765',
-      imgUrl: 'https://ronb.co',
-      imgUrlSmall: 'https://ronb.co',
+      key: 'https://ronb.co',
+      keySmall: 'https://ronb.co',
     })
     .returning()
 

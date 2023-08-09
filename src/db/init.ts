@@ -1,6 +1,6 @@
 import { sql } from '@vercel/postgres'
 
-import { db, ImageTable, ImageTableType } from '@/db/schema'
+import { db, Image, ImageTable } from '@/db/schema'
 
 export async function init() {
   // Create table with raw SQL
@@ -8,8 +8,8 @@ export async function init() {
   CREATE TABLE IF NOT EXISTS "images" (
     "id" serial PRIMARY KEY NOT NULL,
     "user" text NOT NULL,
-    "imgUrl" text NOT NULL,
-    "imgUrlSmall" text NOT NULL,
+    "key" text NOT NULL,
+    "keySmall" text NOT NULL,
     "createdAt" timestamp DEFAULT now()
   );`
 
@@ -28,19 +28,19 @@ export async function seed() {
   CREATE TABLE IF NOT EXISTS "images" (
     "id" serial PRIMARY KEY NOT NULL,
     "user" text NOT NULL,
-    "imgUrl" text NOT NULL,
-    "imgUrlSmall" text NOT NULL,
+    "key" text NOT NULL,
+    "keySmall" text NOT NULL,
     "createdAt" timestamp DEFAULT now()
   );`
 
   console.log(`Created "images" table`)
 
-  const createImages: ImageTableType[] = await db
+  const createImages: Image[] = await db
     .insert(ImageTable)
     .values([
       {
-        imgUrl: 'https://ronb.co',
-        imgUrlSmall: 'https://ronb.co',
+        key: 'https://ronb.co',
+        keySmall: 'https://ronb.co',
         user: 'ronb',
       },
     ])

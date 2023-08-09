@@ -1,6 +1,6 @@
 import { UserButton } from '@clerk/nextjs'
 
-import { PageLayout } from '@components/PageLayout'
+import { PageLayout } from '@components/layouts'
 
 // MAKE A INIT COMPONENT
 
