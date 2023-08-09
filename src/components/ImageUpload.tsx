@@ -12,6 +12,7 @@ interface ImageUploadProps {
 }
 
 export const ImageUpload = ({}: ImageUploadProps) => {
+  const userId = '1234'
   const { previewImages, selectedFiles, handleFileChange, resetFilesInput } =
     useHandleFileUpload()
 
@@ -32,7 +33,7 @@ export const ImageUpload = ({}: ImageUploadProps) => {
 
         try {
           console.log('THE IMAGE STUFF ===>>>', images)
-          const image = await postImages(images)
+          const image = await postImages(userId, images)
           console.log('THE IMAGE STUFF ===>>>', image)
           console.log('ALL WENT WELL')
         } catch (error) {
