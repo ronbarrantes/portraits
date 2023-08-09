@@ -3,6 +3,7 @@ import { revalidatePath } from 'next/cache'
 import { UnwrapPromise } from 'next/dist/lib/coalesced-function'
 
 import { S3Client } from '@aws-sdk/client-s3'
+import { auth, currentUser } from '@clerk/nextjs'
 
 import { s3BucketInfo } from '@/constants/s3-bucket-info'
 import { db, ImageTable } from '@/db/schema'
@@ -15,9 +16,12 @@ import {
 const client = new S3Client(s3BucketInfo.config)
 
 export const postImages = async (
-  userId: string,
   s3Files: { bufferStr: string; key: string }[],
 ) => {
+  const { userId } = auth()
+
+  if (!userId) throw new Error('User is not logged in')
+
   let imageData
   try {
     imageData = await Promise.all(

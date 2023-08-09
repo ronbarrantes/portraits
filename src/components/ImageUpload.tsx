@@ -1,5 +1,6 @@
 'use client'
 import { postImages } from '@actions/image-upload'
+import { auth, currentUser } from '@clerk/nextjs'
 import { extname } from 'path'
 
 import { PostImages } from '@/app/actions/image-upload'
@@ -9,10 +10,10 @@ import { fileToBuffer } from '@/utils/file-to-buffer'
 
 interface ImageUploadProps {
   // postImages: PostImages
+  userId: string
 }
 
 export const ImageUpload = ({}: ImageUploadProps) => {
-  const userId = '1234'
   const { previewImages, selectedFiles, handleFileChange, resetFilesInput } =
     useHandleFileUpload()
 
@@ -33,7 +34,7 @@ export const ImageUpload = ({}: ImageUploadProps) => {
 
         try {
           console.log('THE IMAGE STUFF ===>>>', images)
-          const image = await postImages(userId, images)
+          const image = await postImages(images)
           console.log('THE IMAGE STUFF ===>>>', image)
           console.log('ALL WENT WELL')
         } catch (error) {
