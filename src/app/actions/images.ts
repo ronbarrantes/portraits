@@ -1,17 +1,13 @@
 'use server'
 import { revalidatePath } from 'next/cache'
-import { UnwrapPromise } from 'next/dist/lib/coalesced-function'
 
 import { S3Client } from '@aws-sdk/client-s3'
-import { auth, currentUser } from '@clerk/nextjs'
+import { auth } from '@clerk/nextjs'
+import { eq } from 'drizzle-orm'
 
 import { s3BucketInfo } from '@/constants/s3-bucket-info'
 import { db, ImageTable } from '@/db/schema'
-import {
-  s3FileUpload,
-  s3FileUploadMulti,
-  S3ImageMulti,
-} from '@/hooks/s3-file-utils'
+import { s3FileUploadMulti } from '@/hooks/s3-file-utils'
 
 const client = new S3Client(s3BucketInfo.config)
 
@@ -55,8 +51,21 @@ export const postImages = async (
   } catch (error) {
     console.error('SOMETHING WENT WRONG', error)
   }
-  if (s3Files.length === 0) {
-  }
+
+  revalidatePath('/dashboard')
+}
+
+export const getImages = async () => {
+  const { userId } = auth()
+
+  if (!userId) throw new Error('User is not logged in')
+
+  const images = await db
+    .select()
+    .from(ImageTable)
+    .where(eq(ImageTable.user, userId))
+
+  return images
 }
 
 // export const addImageToDB = async () => {

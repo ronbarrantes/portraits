@@ -1,16 +1,15 @@
 'use client'
-import { auth, currentUser } from '@clerk/nextjs'
 import { extname } from 'path'
 
 import { postImages } from '@/app/actions/images'
-import { PostImages } from '@/app/actions/images'
-import { MAX_FILE_SIZE } from '@/constants/max-file-size'
+// import { MAX_FILE_SIZE } from '@/constants/max-file-size'
 import { useHandleFileUpload } from '@/hooks/use-handle-file-upload'
 import { fileToBuffer } from '@/utils/file-to-buffer'
 
 interface ImageUploadProps {
   // postImages: PostImages
-  userId: string
+  // userId: string
+  // images: Image[]
 }
 
 export const ImageUpload = ({}: ImageUploadProps) => {

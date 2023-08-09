@@ -1,12 +1,8 @@
 import { UnwrapPromise } from 'next/dist/lib/coalesced-function'
 
-import {
-  PutObjectCommand,
-  PutObjectCommandInput,
-  S3Client,
-} from '@aws-sdk/client-s3'
+import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
 
-import { MAX_FILE_SIZE } from '@/constants/max-file-size'
+// import { MAX_FILE_SIZE } from '@/constants/max-file-size'
 
 interface S3File {
   key: string
