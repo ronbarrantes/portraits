@@ -42,9 +42,3 @@ export const NavBar = ({ navItems, children }: NavProps) => {
     </nav>
   )
 }
-
-// export const MainNav = ({ children }: { children: React.ReactNode }) => (
-//   <Nav navItems={mainNavItems}>{children}</Nav>
-// )
-
-// export const DashboardNav = () => <Nav navItems={dashboardNavItems} />
