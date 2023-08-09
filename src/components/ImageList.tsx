@@ -1,5 +1,5 @@
 'use client'
-import { AddImageToDB } from '@/app/actions/image-upload'
+import { AddImageToDB } from '@/app/actions/images'
 import { Image } from '@/db/schema'
 
 interface ImageListProps {

@@ -1,9 +1,9 @@
 'use client'
-import { postImages } from '@actions/image-upload'
 import { auth, currentUser } from '@clerk/nextjs'
 import { extname } from 'path'
 
-import { PostImages } from '@/app/actions/image-upload'
+import { postImages } from '@/app/actions/images'
+import { PostImages } from '@/app/actions/images'
 import { MAX_FILE_SIZE } from '@/constants/max-file-size'
 import { useHandleFileUpload } from '@/hooks/use-handle-file-upload'
 import { fileToBuffer } from '@/utils/file-to-buffer'
