@@ -1,4 +1,6 @@
 'use client'
+import { revalidatePath } from 'next/cache'
+
 import { extname } from 'path'
 
 import { postImages } from '@/app/actions/images'
@@ -17,7 +19,7 @@ export const ImageUpload = ({}: ImageUploadProps) => {
     useHandleFileUpload()
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+    // event.preventDefault()
     if (selectedFiles.length > 0) {
       try {
         const images = await Promise.all(
@@ -36,11 +38,16 @@ export const ImageUpload = ({}: ImageUploadProps) => {
           const image = await postImages(images)
           console.log('THE IMAGE STUFF ===>>>', image)
           console.log('ALL WENT WELL')
+
+          console.log(images)
+
+          revalidatePath('/')
         } catch (error) {
           console.log('TOOK A DUMP')
         }
 
         console.log('SUBMITTED_FILES', selectedFiles)
+
         resetFilesInput()
       } catch (error) {
         // Handle the error from the server
