@@ -8,7 +8,7 @@ interface LogoProps extends React.SVGAttributes<SVGElement> {
   className?: string
 }
 
-export const Logo = (props: LogoProps) => (
+export const RunIcon = (props: LogoProps) => (
   <svg
     width="31"
     height="25"
