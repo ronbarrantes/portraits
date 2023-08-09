@@ -12,8 +12,8 @@ import { drizzle } from 'drizzle-orm/vercel-postgres'
 export const ImageTable = pgTable('images', {
   id: serial('id').primaryKey().notNull(),
   user: text('user').notNull(),
-  imgUrl: text('imgUrl').notNull(),
-  imgUrlSmall: text('imgUrlSmall').notNull(),
+  key: text('key').notNull(),
+  keySmall: text('keySmall').notNull(),
   createdAt: timestamp('createdAt').defaultNow(),
 })
 

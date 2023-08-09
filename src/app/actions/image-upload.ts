@@ -49,8 +49,8 @@ export const addImageToDB = async () => {
     .insert(ImageTable)
     .values({
       user: '12345678765',
-      imgUrl: 'https://ronb.co',
-      imgUrlSmall: 'https://ronb.co',
+      key: 'https://ronb.co',
+      keySmall: 'https://ronb.co',
     })
     .returning()
 

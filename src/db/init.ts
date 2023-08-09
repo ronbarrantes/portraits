@@ -8,8 +8,8 @@ export async function init() {
   CREATE TABLE IF NOT EXISTS "images" (
     "id" serial PRIMARY KEY NOT NULL,
     "user" text NOT NULL,
-    "imgUrl" text NOT NULL,
-    "imgUrlSmall" text NOT NULL,
+    "key" text NOT NULL,
+    "keySmall" text NOT NULL,
     "createdAt" timestamp DEFAULT now()
   );`
 
@@ -28,8 +28,8 @@ export async function seed() {
   CREATE TABLE IF NOT EXISTS "images" (
     "id" serial PRIMARY KEY NOT NULL,
     "user" text NOT NULL,
-    "imgUrl" text NOT NULL,
-    "imgUrlSmall" text NOT NULL,
+    "key" text NOT NULL,
+    "keySmall" text NOT NULL,
     "createdAt" timestamp DEFAULT now()
   );`
 
@@ -39,8 +39,8 @@ export async function seed() {
     .insert(ImageTable)
     .values([
       {
-        imgUrl: 'https://ronb.co',
-        imgUrlSmall: 'https://ronb.co',
+        key: 'https://ronb.co',
+        keySmall: 'https://ronb.co',
         user: 'ronb',
       },
     ])
