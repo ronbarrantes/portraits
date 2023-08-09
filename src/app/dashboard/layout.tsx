@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 
 import { PageLayout } from '@components/layouts'
-import { DashboardNav } from '@components/navigation'
+import { NavBar } from '@/ui/NavBar'
+import { dashboardNavItems } from '../client/navigation'
 
 // const inter = Inter({ subsets: ['latin'] })
 
@@ -18,7 +19,7 @@ export default function RootLayout({
   return (
     <>
       <PageLayout>
-        <DashboardNav />
+        <NavBar navItems={dashboardNavItems} />
         {children}
       </PageLayout>
     </>

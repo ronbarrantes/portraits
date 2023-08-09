@@ -18,7 +18,7 @@ const LinkButton = ({
   </Link>
 )
 
-type NavItem = {
+export type NavItem = {
   href: string
   name: string | React.ReactNode
 }
@@ -27,33 +27,7 @@ interface NavProps {
   children?: React.ReactNode
 }
 
-export const mainNavItems: NavItem[] = [
-  {
-    href: '/',
-    name: 'main',
-  },
-  {
-    href: '/dashboard',
-    name: 'dashboard',
-  },
-  {
-    href: '/generate',
-    name: 'generate',
-  },
-]
-
-export const dashboardNavItems: NavItem[] = [
-  {
-    href: '/dashboard',
-    name: 'uploaded',
-  },
-  {
-    href: '/dashboard/generated',
-    name: 'generate',
-  },
-]
-
-export const Nav = ({ navItems, children }: NavProps) => {
+export const NavBar = ({ navItems, children }: NavProps) => {
   return (
     <nav className="flex items-center">
       <ul className="flex items-center gap-3">
@@ -69,8 +43,8 @@ export const Nav = ({ navItems, children }: NavProps) => {
   )
 }
 
-export const MainNav = ({ children }: { children: React.ReactNode }) => (
-  <Nav navItems={mainNavItems}>{children}</Nav>
-)
+// export const MainNav = ({ children }: { children: React.ReactNode }) => (
+//   <Nav navItems={mainNavItems}>{children}</Nav>
+// )
 
-export const DashboardNav = () => <Nav navItems={dashboardNavItems} />
+// export const DashboardNav = () => <Nav navItems={dashboardNavItems} />

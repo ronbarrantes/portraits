@@ -2,8 +2,9 @@ import Link from 'next/link'
 
 import { UserButton } from '@clerk/nextjs'
 
+import { mainNavItems } from '@/app/client/navigation'
 import { Logo } from '@/ui/Logo'
-import { DashboardNav, MainNav } from './navigation'
+import { NavBar } from '@/ui/NavBar'
 
 interface PageLayoutProps {
   children: React.ReactNode
@@ -16,7 +17,7 @@ export const PageLayout = ({ children }: PageLayoutProps) => {
         <Link href="/" aria-label="Portrait app logo">
           <Logo />
         </Link>
-        <MainNav>
+        <NavBar navItems={mainNavItems}>
           <UserButton
             appearance={{
               elements: {
@@ -25,7 +26,7 @@ export const PageLayout = ({ children }: PageLayoutProps) => {
             }}
             afterSignOutUrl="/"
           />
-        </MainNav>
+        </NavBar>
       </header>
       <main className="flex flex-col items-center justify-between w-full gap-5 p-1 sm:max-w-6xl">
         {children}
