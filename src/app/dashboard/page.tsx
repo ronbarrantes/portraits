@@ -32,7 +32,7 @@ export default async function Dashboard() {
 
   return (
     <div>
-      <ImageUpload />
+      <ImageUpload images={images} />
       <ul className="flex flex-wrap w-full h-full">
         {images.map((image, idx) => (
           <li

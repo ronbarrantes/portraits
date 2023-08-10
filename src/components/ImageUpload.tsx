@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { extname } from 'path'
 
 import { postImages } from '@/app/actions/images'
+import { Image } from '@/db/schema'
 // import { MAX_FILE_SIZE } from '@/constants/max-file-size'
 import { useHandleFileUpload } from '@/hooks/use-handle-file-upload'
 import { fileToBuffer } from '@/utils/file-to-buffer'
@@ -11,7 +12,7 @@ import { fileToBuffer } from '@/utils/file-to-buffer'
 interface ImageUploadProps {
   // postImages: PostImages
   // userId: string
-  // images: Image[]
+  images: Image[]
 }
 
 export const ImageUpload = ({}: ImageUploadProps) => {
@@ -22,7 +23,7 @@ export const ImageUpload = ({}: ImageUploadProps) => {
     // event.preventDefault()
     if (selectedFiles.length > 0) {
       try {
-        const images = await Promise.all(
+        let imagesToUpload = await Promise.all(
           selectedFiles.map(async (file) => {
             const bufferStr = (await fileToBuffer(file)).toString('base64')
             console.log('EXT', extname(file.name))
@@ -33,13 +34,15 @@ export const ImageUpload = ({}: ImageUploadProps) => {
           }),
         )
 
+        imagesToUpload = imagesToUpload.filter((image) => image.key !== '')
+
         try {
-          console.log('THE IMAGE STUFF ===>>>', images)
-          const image = await postImages(images)
+          console.log('THE IMAGE STUFF ===>>>', imagesToUpload)
+          const image = await postImages(imagesToUpload)
           console.log('THE IMAGE STUFF ===>>>', image)
           console.log('ALL WENT WELL')
 
-          console.log(images)
+          console.log(imagesToUpload)
 
           revalidatePath('/')
         } catch (error) {
