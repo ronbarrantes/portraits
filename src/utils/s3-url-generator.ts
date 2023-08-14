@@ -5,6 +5,8 @@
  * @param key The key is the name of the file. It can include a path. Example: 'images/1234567890.jpg'
  * @returns A url to the file in the bucket. Example: 'https://portrait-app-bucket.s3.amazonaws.com/images/1234567890.jpg'
  */
+
 export const s3URLGenerator = (bucket: string, key: string) => {
+  key = key.replace(/ /g, '+') // replace spaces with plus signs because aws doesn't like spaces
   return `https://${bucket}.s3.amazonaws.com/${key}`
 }

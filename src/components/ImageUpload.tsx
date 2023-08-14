@@ -1,14 +1,18 @@
 'use client'
-import { postImages } from '@actions/image-upload'
+import { revalidatePath } from 'next/cache'
+
 import { extname } from 'path'
 
-import { PostImages } from '@/app/actions/image-upload'
-import { MAX_FILE_SIZE } from '@/constants/max-file-size'
+import { postImages } from '@/app/actions/images'
+import { Image } from '@/db/schema'
+// import { MAX_FILE_SIZE } from '@/constants/max-file-size'
 import { useHandleFileUpload } from '@/hooks/use-handle-file-upload'
 import { fileToBuffer } from '@/utils/file-to-buffer'
 
 interface ImageUploadProps {
   // postImages: PostImages
+  // userId: string
+  images: Image[]
 }
 
 export const ImageUpload = ({}: ImageUploadProps) => {
@@ -16,10 +20,10 @@ export const ImageUpload = ({}: ImageUploadProps) => {
     useHandleFileUpload()
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+    // event.preventDefault()
     if (selectedFiles.length > 0) {
       try {
-        const images = await Promise.all(
+        let imagesToUpload = await Promise.all(
           selectedFiles.map(async (file) => {
             const bufferStr = (await fileToBuffer(file)).toString('base64')
             console.log('EXT', extname(file.name))
@@ -30,16 +34,23 @@ export const ImageUpload = ({}: ImageUploadProps) => {
           }),
         )
 
+        imagesToUpload = imagesToUpload.filter((image) => image.key !== '')
+
         try {
-          console.log('THE IMAGE STUFF ===>>>', images)
-          const image = await postImages(images)
+          console.log('THE IMAGE STUFF ===>>>', imagesToUpload)
+          const image = await postImages(imagesToUpload)
           console.log('THE IMAGE STUFF ===>>>', image)
           console.log('ALL WENT WELL')
+
+          console.log(imagesToUpload)
+
+          revalidatePath('/')
         } catch (error) {
           console.log('TOOK A DUMP')
         }
 
         console.log('SUBMITTED_FILES', selectedFiles)
+
         resetFilesInput()
       } catch (error) {
         // Handle the error from the server
