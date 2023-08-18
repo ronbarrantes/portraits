@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { UserButton } from '@clerk/nextjs'
 import classNames from 'classnames'
 
-import { IconName } from './Icon'
+import { Icon, IconName } from './Icon'
 
 const LinkButton = ({
   href,
@@ -49,6 +49,10 @@ export const NavBar = ({ navItems, children }: NavProps) => {
   )
 }
 
+export const MainNavBarButton = () => {
+  return <Icon name="photos" />
+}
+
 export const MainNavBar = ({ navItems, children }: NavProps) => {
   return (
     <nav
@@ -56,6 +60,7 @@ export const MainNavBar = ({ navItems, children }: NavProps) => {
         'flex flex-col items-center border border-green-300',
       )}
     >
+      <MainNavBarButton />
       <ul className="flex flex-col items-center gap-3">
         {navItems.map((item, idx) => (
           <li key={idx}>
