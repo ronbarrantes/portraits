@@ -13,11 +13,11 @@ interface PageLayoutProps {
 const MainNav = () => {
   return (
     <nav className="flex items-center flex-col border border-purple-500       justify-between w-20 p-4 mb-5 lg:w-1/6">
-      <Link href="/" aria-label="Portrait app logo">
-        <Logo />
-      </Link>
-      <MainNavBar navItems={mainNavItems} />
-      <button>Log Out</button>
+ <Link href="/" aria-label="Portrait app logo">
+ <Logo />
+ </Link>
+  <MainNavBar navItems={mainNavItems} />
+  <button>Log Out</button>
     </nav>
   )
 }
