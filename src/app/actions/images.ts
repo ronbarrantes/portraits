@@ -7,7 +7,7 @@ import { eq } from 'drizzle-orm'
 
 import { s3BucketInfo } from '@/constants/s3-bucket-info'
 import { db, ImageTable } from '@/db/schema'
-import { s3FileUploadMulti } from '@/hooks/s3-file-utils'
+import { s3FileUploadMulti } from '@/utils/s3-file-utils'
 
 const client = new S3Client(s3BucketInfo.config)
 
