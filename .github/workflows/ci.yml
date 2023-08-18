@@ -32,3 +32,6 @@ jobs:
 
       - name: Linting
         run: pnpm run lint
+
+      - name: Lint Fix
+        run: pnpm run lint --fix
