@@ -12,7 +12,8 @@ const iconMap = {
   logout: ExitIcon,
 } as const
 
-type IconName = keyof typeof iconMap
+export type IconName = keyof typeof iconMap
+
 interface IconProps {
   name: IconName
   className?: string
