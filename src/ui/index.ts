@@ -1,4 +1,4 @@
 export * from './Logo'
-export * from './NavBar'
+export * from './navigation'
 export * from './RunIcon'
 export * from './Icon'
