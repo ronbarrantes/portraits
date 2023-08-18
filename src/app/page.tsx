@@ -2,9 +2,9 @@ import { UserButton } from '@clerk/nextjs'
 
 import { PageLayout } from '@components/layouts'
 
-// MAKE A INIT COMPONENT
-
-// MAKE A CONTENT COMPONENT
+// Create a plan
+//
+// Start the new layout
 
 export default async function Generate() {
   return (

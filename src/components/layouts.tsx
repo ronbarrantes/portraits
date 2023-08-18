@@ -10,14 +10,24 @@ interface PageLayoutProps {
   children: React.ReactNode
 }
 
+const MainNav = () => {
+  return (
+    <nav className="flex flex-col items-center justify-between w-20 p-4 mb-5 lg:w-1/6">
+      <Link href="/" aria-label="Portrait app logo">
+        <Logo />
+      </Link>
+      <NavBar navItems={mainNavItems} />
+      <button>Log Out</button>
+    </nav>
+  )
+}
+
 export const PageLayout = ({ children }: PageLayoutProps) => {
   return (
-    <div className="flex flex-col items-center min-h-screen">
-      <header className="flex items-center justify-between w-full p-4 mb-5 sm:max-w-6xl">
-        <Link href="/" aria-label="Portrait app logo">
-          <Logo />
-        </Link>
-        <NavBar navItems={mainNavItems}>
+    <div className="flex items-center min-h-screen">
+      <MainNav />
+      <div>
+        <header className="flex flex-col items-center justify-between w-20 p-4 mb-5 border border-red-500 lg:w-1/6">
           <UserButton
             appearance={{
               elements: {
@@ -26,11 +36,11 @@ export const PageLayout = ({ children }: PageLayoutProps) => {
             }}
             afterSignOutUrl="/"
           />
-        </NavBar>
-      </header>
-      <main className="flex flex-col items-center justify-between w-full gap-5 p-1 sm:max-w-6xl">
-        {children}
-      </main>
+        </header>
+        <main className="flex flex-col items-center justify-between w-full gap-5 p-1 sm:max-w-6xl">
+          {children}
+        </main>
+      </div>
     </div>
   )
 }
