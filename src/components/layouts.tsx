@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { UserButton } from '@clerk/nextjs'
 
 import { Logo } from '@ui'
-import { NavBar } from '@ui'
+import { MainNavBar } from '@ui'
 import { mainNavItems } from '@/app/client/navigation'
 
 interface PageLayoutProps {
@@ -16,7 +16,7 @@ const MainNav = () => {
       <Link href="/" aria-label="Portrait app logo">
         <Logo />
       </Link>
-      <NavBar navItems={mainNavItems} />
+      <MainNavBar navItems={mainNavItems} />
       <button>Log Out</button>
     </nav>
   )

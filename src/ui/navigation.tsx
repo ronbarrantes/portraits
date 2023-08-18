@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import { UserButton } from '@clerk/nextjs'
+import classNames from 'classnames'
 
 import { IconName } from './Icon'
 
@@ -28,11 +29,33 @@ export type NavItem = {
 interface NavProps {
   navItems: NavItem[]
   children?: React.ReactNode
+  isMain?: boolean
 }
 
+// GENERALIZE THIS COMPONENT
 export const NavBar = ({ navItems, children }: NavProps) => {
   return (
-    <nav className="flex flex-col items-center border border-green-300">
+    <nav className="flex items-center">
+      <ul className="flex items-center gap-3">
+        {navItems.map((item, idx) => (
+          <li key={idx}>
+            <LinkButton href={item.href}>{item.name}</LinkButton>
+          </li>
+        ))}
+      </ul>
+
+      {children && <div className="ml-3 w-9 h-9">{children}</div>}
+    </nav>
+  )
+}
+
+export const MainNavBar = ({ navItems, children }: NavProps) => {
+  return (
+    <nav
+      className={classNames(
+        'flex flex-col items-center border border-green-300',
+      )}
+    >
       <ul className="flex flex-col items-center gap-3">
         {navItems.map((item, idx) => (
           <li key={idx}>
