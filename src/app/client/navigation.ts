@@ -1,17 +1,21 @@
 import { NavItem } from '@ui'
+// import { FaceIcon, CameraIcon ImageIcon, SunIcon, DashboardIcon, LightningBoltIcon } from '@radix-ui/react-icons'
 
 export const mainNavItems: NavItem[] = [
   {
     href: '/',
-    name: 'main',
-  },
-  {
-    href: '/dashboard',
-    name: 'dashboard',
+    name: 'Dashboard',
+    icon: 'dashboard',
   },
   {
     href: '/generate',
-    name: 'generate',
+    name: 'Generate',
+    icon: 'generate',
+  },
+  {
+    href: '/my-photos',
+    name: 'My Photos',
+    icon: 'photos',
   },
 ]
 

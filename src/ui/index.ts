@@ -1,3 +1,5 @@
 export * from './Logo'
-export * from './NavBar'
+export * from './navigation'
 export * from './RunIcon'
+export * from './Icon'
+export { Tooltip } from './radix/tooltip/Tooltip'

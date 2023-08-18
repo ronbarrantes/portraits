@@ -9,10 +9,8 @@ interface ImageListProps {
 }
 
 export const ImageList = async ({
-  images,
-} // addImageToDB
-
-: ImageListProps) => {
+  images, // addImageToDB
+}: ImageListProps) => {
   console.log('IMAGES', images)
 
   return <>{/* <button onClick={() => addImageToDB()}>Add To DB</button> */}</>
