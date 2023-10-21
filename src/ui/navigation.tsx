@@ -56,11 +56,9 @@ export const MainNavBarButton = () => {
 export const MainNavBar = ({ navItems, children }: NavProps) => {
   return (
     <nav
-      className={classNames(
-        'flex flex-col items-center border border-green-300',
-      )}
+      className={classNames('flex flex-col items-center')}
     >
-      <MainNavBarButton />
+      {/* <MainNavBarButton /> */}
       <ul className="flex flex-col items-center gap-3">
         {navItems.map((item, idx) => (
           <li key={idx}>

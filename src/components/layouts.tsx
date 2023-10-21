@@ -7,27 +7,29 @@ import { MainNavBar } from '@ui'
 import { mainNavItems } from '@/app/client/navigation'
 
 interface PageLayoutProps {
+  title: string
   children: React.ReactNode
 }
 
 const MainNav = () => {
   return (
-    <nav className="flex items-center flex-col border border-purple-500       justify-between w-20 p-4 mb-5 lg:w-1/6">
- <Link href="/" aria-label="Portrait app logo">
- <Logo />
- </Link>
-  <MainNavBar navItems={mainNavItems} />
-  <button>Log Out</button>
+    <nav className="flex flex-col items-center w-32 p-4 border border-pink-500 min-w-20">
+      <Link href="/" aria-label="Portrait app logo">
+      <Logo className='m-auto border-red-500' />
+      <hr className='flex w-20 my-10'/>
+      </Link>
+      <MainNavBar navItems={mainNavItems} />
     </nav>
   )
 }
 
-export const PageLayout = ({ children }: PageLayoutProps) => {
+export const PageLayout = ({ title, children }: PageLayoutProps) => {
   return (
-    <div className="flex items-center min-h-screen">
+    <div className="flex min-h-screen border border-purple-700">
       <MainNav />
-      <div>
-        <header className="flex flex-col items-center justify-between w-20 p-4 mb-5 border border-red-500 lg:w-1/6">
+      <div className='w-full border border-green-600'>
+        <header className="flex items-center justify-between w-full p-4 mb-5 border border-red-500">
+          <h1 className="text-2xl">{title}</h1>
           <UserButton
             appearance={{
               elements: {
