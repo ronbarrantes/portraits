@@ -13,7 +13,7 @@
     "db:push": "pnpm with-env prisma db push --skip-generate",
     "db:pull": "pnpm with-env prisma db pull",
     "studio": "pnpm with-env prisma studio --port 5555",
-    "with-env": "dotenv -e ../../.env.development.local --"
+    "with-env": "dotenv -e ./.env.development.local --"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.433.0",
@@ -34,7 +34,6 @@
     "aws-sdk-js-codemod": "^0.17.7",
     "classnames": "^2.3.2",
     "dotenv": "^16.3.1",
-    "drizzle-orm": "^0.27.2",
     "eslint": "8.46.0",
     "eslint-config-next": "13.5.6",
     "eslint-plugin-simple-import-sort": "^10.0.0",
@@ -51,9 +50,9 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
-    "drizzle-kit": "^0.19.13",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.4.1",
-    "prisma": "^5.4.2"
+    "prisma": "^5.4.2",
+    "with-env": "^1.0.0"
   }
 }
