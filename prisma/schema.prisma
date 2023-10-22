@@ -12,15 +12,26 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
+enum ImageType {
+  USER_SUBMITTED
+  GENERATED
+}
+
 model Image {
-  id               String   @id @default(cuid())
-  userId           String   @map(name: "user_id") // this id comes from clerk.com's user id
+  id               String    @id @default(cuid())
+  userId           String    @map(name: "user_id") // this id comes from clerk.com's user id
   url              String
-  urlSmall         String?  @map(name: "url_small")
+  urlSmall         String?   @map(name: "url_small")
   name             String?
-  imageDescription String?  @map(name: "image_description")
-  createdAt        DateTime @default(now()) @map(name: "created_at")
-  updatedAt        DateTime @updatedAt @map(name: "updated_at")
+  type             ImageType @default(USER_SUBMITTED)
+  imageDescription String?   @map(name: "image_description")
+  createdAt        DateTime  @default(now()) @map(name: "created_at")
+  updatedAt        DateTime  @updatedAt @map(name: "updated_at")
 
   @@map(name: "images")
 }
