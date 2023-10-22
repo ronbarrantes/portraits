@@ -12,22 +12,15 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-model Post {
-  id        String  @id @default(cuid())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  String?
-}
+model Image {
+  id               String   @id @default(cuid())
+  userId           String   @unique @map(name: "user_id") // this id comes from clerk.com's user id
+  url              String
+  urlSmall         String?  @map(name: "url_small")
+  name             String?
+  imageDescription String?  @map(name: "image_description")
+  createdAt        DateTime @default(now()) @map(name: "created_at")
+  updatedAt        DateTime @updatedAt @map(name: "updated_at")
 
-model User {
-  id        String   @id @default(cuid())
-  name      String?
-  email     String?  @unique
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
-  posts     Post[]
-
-  @@map(name: "users")
+  @@map(name: "images")
 }
