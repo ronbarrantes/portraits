@@ -4,8 +4,14 @@ export default async function Dashboard() {
   // an array just to show images
   const images = ['1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2']
 
+  const post = await fetch('http://localhost:3000/api/get-posts')
+
+  const data = await post.json()
+
   return (
     <div className="w-full h-full ">
+      {JSON.stringify(data)}
+
       <ul className="flex flex-wrap ">
         {images.map((image, idx) => (
           <li
