@@ -14,7 +14,7 @@ datasource db {
 
 model Image {
   id               String   @id @default(cuid())
-  userId           String   @unique @map(name: "user_id") // this id comes from clerk.com's user id
+  userId           String   @map(name: "user_id") // this id comes from clerk.com's user id
   url              String
   urlSmall         String?  @map(name: "url_small")
   name             String?
