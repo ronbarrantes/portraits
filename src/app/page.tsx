@@ -14,7 +14,7 @@ export default async function Generate() {
     <PageLayout title="Picture app">
       <p>Upload photos</p>
       <ImageUpload />
-      {/* <ImageList /> */}
+      <ImageList />
     </PageLayout>
   )
 }

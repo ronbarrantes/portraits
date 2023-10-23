@@ -1,15 +1,14 @@
 'use client'
 import { useEffect, useState } from 'react'
 
+import Image from 'next/image'
+
 export const ImageList = () => {
   const [images, setImages] = useState([])
   useEffect(() => {
     const fetchImages = async () => {
       const res = await fetch('/api/images')
       const data = await res.json()
-
-      console.log('STUFF', data.userId)
-
       setImages(data.images)
     }
     fetchImages()
@@ -17,7 +16,13 @@ export const ImageList = () => {
 
   return (
     <div>
-      <div>Images: {images?.length}</div>
+      <ul className="flex flex-wrap">
+        {images.map((image, idx) => (
+          <li key={image.id}>
+            <Image src={image.url} width={30} height={30} alt="uploaded image" />
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

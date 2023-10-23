@@ -19,8 +19,6 @@ export async function GET(request: NextRequest) {
 
   const images = await prisma.image.findMany()
 
-  console.log('IMAGES ---->>>', images)
-
   return NextResponse.json({ images })
 }
 
