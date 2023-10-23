@@ -9,7 +9,6 @@ import { authMiddleware } from '@clerk/nextjs'
 export default authMiddleware({
   // afterAuth: (auth, req, evt) => {
   //   console.log('AUTH', auth)
-
   //   // handle users who aren't authenticated
   //   // if (!auth.userId && !auth.isPublicRoute) {
   //   //   return redirectToSignIn({ returnBackUrl: req.url })
@@ -24,8 +23,7 @@ export default authMiddleware({
   //   //   return NextResponse.redirect(orgSelection)
   //   // }
   // },
-
-  publicRoutes: ['/api'],
+  // publicRoutes: ['/api'],
 })
 
 export const config = {

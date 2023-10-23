@@ -1,17 +1,23 @@
 'use client'
-// import { AddImageToDB } from '@actions/images'
+import { useEffect, useState } from 'react'
 
-import { Image } from '@/db/schema'
+export const ImageList = () => {
+  const [images, setImages] = useState([])
+  useEffect(() => {
+    const fetchImages = async () => {
+      const res = await fetch('/api/images')
+      const data = await res.json()
 
-interface ImageListProps {
-  images: Image[]
-  // addImageToDB: AddImageToDB
-}
+      console.log('STUFF', data.userId)
 
-export const ImageList = async ({
-  images, // addImageToDB
-}: ImageListProps) => {
-  console.log('IMAGES', images)
+      setImages(data.images)
+    }
+    fetchImages()
+  }, [])
 
-  return <>{/* <button onClick={() => addImageToDB()}>Add To DB</button> */}</>
+  return (
+    <div>
+      <div>Images: {images?.length}</div>
+    </div>
+  )
 }

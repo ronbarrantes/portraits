@@ -1,46 +1,45 @@
 import { revalidatePath } from 'next/cache'
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 import { S3Client } from '@aws-sdk/client-s3'
-import { auth } from '@clerk/nextjs'
+import { auth, currentUser } from '@clerk/nextjs'
 import { PrismaClient } from '@prisma/client'
 
 import { s3BucketInfo } from '@/constants/s3-bucket-info'
 import { s3FileUpload } from '@/utils/s3-file-utils'
 import { s3URLGenerator } from '@/utils/s3-url-generator'
 
-const client = new S3Client(s3BucketInfo.config)
-
 export async function GET(request: NextRequest) {
-  const path = request.nextUrl.searchParams.get('path')
   const { userId } = auth()
+
+  const user = await currentUser()
+
+  console.log('USER ---->>>', user)
 
   if (!userId)
     return Response.json({ message: 'Unauthorized' }, { status: 401 })
+
+  const path = request.nextUrl.searchParams.get('path')
 
   if (!path)
     return Response.json({ message: 'Missing path param' }, { status: 400 })
 
   const prisma = new PrismaClient()
-  const images = await prisma.image.findMany({
-    where: {
-      userId: userId,
-    },
-  })
+  const images = await prisma.image.findMany()
 
   revalidatePath(path)
-  return Response.json({ message: 'Image uploaded successfully', images })
+  return NextResponse.json({ message: 'Image uploaded successfully', images })
 }
 
 // POST ROUTE
 export async function POST(request: NextRequest) {
-  const client = new S3Client(s3BucketInfo.config)
   const { userId } = auth()
+  const client = new S3Client(s3BucketInfo.config)
   // console.log('POST USER ID ---->>>', userId)
   const path = request.nextUrl.searchParams.get('path') || '/'
 
   if (!userId)
-    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
+    return Response.json({ message: 'Unauthorized' }, { status: 401 })
 
   // if (!path)
   //   return NextResponse.json({ message: 'Missing path param' }, { status: 400 })
