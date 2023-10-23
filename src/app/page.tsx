@@ -1,9 +1,7 @@
-'use server'
-import { UserButton } from '@clerk/nextjs'
 
 import { PageLayout } from '@components/layouts'
-import { Btn } from '@/components/Btn'
-import { POST } from './api/images/route'
+import ImageUpload from '@/components/ImageUpload'
+
 
 export default async function Generate() {
   // handleClick()
@@ -11,8 +9,7 @@ export default async function Generate() {
   return (
     <PageLayout title="Picture app">
       <p>Upload photos</p>
-
-      <Btn />
+      <ImageUpload />
     </PageLayout>
   )
 }

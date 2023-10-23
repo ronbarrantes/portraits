@@ -7,6 +7,24 @@ import { authMiddleware } from '@clerk/nextjs'
 // create a function that will make a user if they don't exist
 
 export default authMiddleware({
+  // afterAuth: (auth, req, evt) => {
+  //   console.log('AUTH', auth)
+
+  //   // handle users who aren't authenticated
+  //   // if (!auth.userId && !auth.isPublicRoute) {
+  //   //   return redirectToSignIn({ returnBackUrl: req.url })
+  //   // }
+  //   // // redirect them to organization selection page
+  //   // if (
+  //   //   auth.userId &&
+  //   //   !auth.orgId &&
+  //   //   req.nextUrl.pathname !== '/org-selection'
+  //   // ) {
+  //   //   const orgSelection = new URL('/org-selection', req.url)
+  //   //   return NextResponse.redirect(orgSelection)
+  //   // }
+  // },
+
   publicRoutes: ['/api'],
 })
 

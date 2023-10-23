@@ -26,6 +26,7 @@ model Image {
   id               String    @id @default(cuid())
   userId           String    @map(name: "user_id") // this id comes from clerk.com's user id
   url              String
+  key              String
   urlSmall         String?   @map(name: "url_small")
   name             String?
   type             ImageType @default(USER_SUBMITTED)

@@ -3,69 +3,55 @@ import { revalidatePath } from 'next/cache'
 
 import { extname } from 'path'
 
-// import { postImages } from '@/app/actions/images'
+import { postImages } from '@/app/actions/images'
+import { Image } from '@/db/schema'
+// import { MAX_FILE_SIZE } from '@/constants/max-file-size'
 import { useHandleFileUpload } from '@/hooks/use-handle-file-upload'
 import { fileToBuffer } from '@/utils/file-to-buffer'
 
 interface ImageUploadProps {
   // postImages: PostImages
   // userId: string
-  // images: Image[]
+  images: Image[]
 }
 
-export const ImageUpload = () => {
+export const ImageUpload = ({}: ImageUploadProps) => {
   const { previewImages, selectedFiles, handleFileChange, resetFilesInput } =
     useHandleFileUpload()
 
-  const formData = new FormData()
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+    // event.preventDefault()
     if (selectedFiles.length > 0) {
       try {
-        // let imagesToUpload = await Promise.all(
-        //   selectedFiles.map(async (file) => {
-        //     const bufferStr = (await fileToBuffer(file)).toString('base64')
-        //     // console.log('EXT', extname(file.name))
-        //     return {
-        //       key: file.name,
-        //       bufferStr,
-        //     }
-        //   }),
-        // )
-
-        selectedFiles.forEach((file, idx) => {
-          formData.append(`images-${idx}`, file)
-        })
-
-        // imagesToUpload = imagesToUpload.filter((image) => image.key !== '')
-
-        // console.log('IMAGES TO UPLOAD', imagesToUpload)
-
-        const image = await fetch(
-          'http://localhost:3000/api/images',
-          {
-            method: 'POST',
-            body: formData,
-          },
-
-          // imagesToUpload
+        let imagesToUpload = await Promise.all(
+          selectedFiles.map(async (file) => {
+            const bufferStr = (await fileToBuffer(file)).toString('base64')
+            console.log('EXT', extname(file.name))
+            return {
+              key: file.name,
+              bufferStr,
+            }
+          }),
         )
 
-        console.log('THE IMAGE STUFF ===>>>', image)
-        console.log('ALL WENT WELL')
+        imagesToUpload = imagesToUpload.filter((image) => image.key !== '')
 
-        // try {
-        //   // do the fetch post here
+        try {
+          console.log('THE IMAGE STUFF ===>>>', imagesToUpload)
+          const image = await postImages(imagesToUpload)
+          console.log('THE IMAGE STUFF ===>>>', image)
+          console.log('ALL WENT WELL')
 
-        //   // console.log(imagesToUpload)
+          console.log(imagesToUpload)
 
-        //   revalidatePath('/')
-        // } catch (error) {
-        //   console.log('TOOK A DUMP')
-        // }
+          revalidatePath('/')
+        } catch (error) {
+          console.log('TOOK A DUMP')
+        }
 
-        // resetFilesInput()
+        console.log('SUBMITTED_FILES', selectedFiles)
+
+        resetFilesInput()
       } catch (error) {
         // Handle the error from the server
         console.error('Error uploading images:', error)
