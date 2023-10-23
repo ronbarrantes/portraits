@@ -9,12 +9,12 @@ import { s3BucketInfo } from '@/constants/s3-bucket-info'
 import { s3FileUpload } from '@/utils/s3-file-utils'
 import { s3URLGenerator } from '@/utils/s3-url-generator'
 
-export async function GET(request: NextRequest) {
+export async function GET(request: NextRequest, response: NextResponse) {
   const { userId } = auth()
   // const path = request.nextUrl.searchParams.get('path') || '/'
 
   if (!userId)
-  return Response.json({ message: 'Unauthorized' }, { status: 401 })
+  return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
 
   const prisma = new PrismaClient()
   const images = await prisma.image.findMany()
@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
   // const path = request.nextUrl.searchParams.get('path') || '/'
 
   if (!userId)
-    return Response.json({ message: 'Unauthorized' }, { status: 401 })
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
 
   // if (!path)
   //   return NextResponse.json({ message: 'Missing path param' }, { status: 400 })
@@ -72,5 +72,5 @@ export async function POST(request: NextRequest) {
   })
 
   revalidatePath('/')
-  return Response.json({ message: 'Image uploaded successfully', images })
+  return NextResponse.json({ message: 'Image uploaded successfully', images })
 }
