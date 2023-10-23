@@ -12,10 +12,10 @@ import { s3URLGenerator } from '@/utils/s3-url-generator'
 export async function GET(request: NextRequest) {
   const { userId } = auth()
 
-  const user = await currentUser()
+  // const user = await currentUser()
   const prisma = new PrismaClient()
 
-  console.log('USER ---->>>', user?.id)
+  // console.log('USER ---->>>', user?.id)
 
   if (!userId)
     return Response.json({ message: 'Unauthorized' }, { status: 401 })
