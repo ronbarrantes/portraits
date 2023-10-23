@@ -72,6 +72,6 @@ export async function POST(request: NextRequest) {
     })),
   })
 
-  // revalidatePath(path)
+  revalidatePath('/')
   return Response.json({ message: 'Image uploaded successfully', images })
 }
