@@ -17,8 +17,8 @@ export const ImageList = () => {
   return (
     <div>
       <ul className="flex flex-wrap">
-        {images.map((image, idx) => (
-          <li key={image.id}>
+        {images.map((image: {id: string, url:string}, idx) => (
+          <li key={`${image.id}-${idx}`}>
             <Image src={image.url} width={30} height={30} alt="uploaded image" />
           </li>
         ))}
