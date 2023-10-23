@@ -13,11 +13,10 @@ export async function GET(request: NextRequest) {
   const { userId } = auth()
   // const path = request.nextUrl.searchParams.get('path') || '/'
 
-  const prisma = new PrismaClient()
-
   if (!userId)
-    return Response.json({ message: 'Unauthorized' }, { status: 401 })
+  return Response.json({ message: 'Unauthorized' }, { status: 401 })
 
+  const prisma = new PrismaClient()
   const images = await prisma.image.findMany()
 
   // revalidatePath(path)
