@@ -1,7 +1,5 @@
-
 import { PageLayout } from '@components/layouts'
 import ImageUpload from '@/components/ImageUpload'
-
 
 export default async function Generate() {
   // handleClick()
