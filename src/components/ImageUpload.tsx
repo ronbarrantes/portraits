@@ -80,11 +80,6 @@ export const ImageUpload = () => {
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <div className="flex gap-2">
 
-
-
-
-
-
           <input
             type="file"
             accept="image/png, image/jpeg, image/jpg"
