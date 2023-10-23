@@ -32,15 +32,18 @@ export async function GET(request: NextRequest) {
   return Response.json({ message: 'Image uploaded successfully', images })
 }
 
+// POST ROUTE
 export async function POST(request: NextRequest) {
+  const client = new S3Client(s3BucketInfo.config)
   const { userId } = auth()
-  const path = request.nextUrl.searchParams.get('path')
+  // console.log('POST USER ID ---->>>', userId)
+  const path = request.nextUrl.searchParams.get('path') || '/'
 
   if (!userId)
-    return Response.json({ message: 'Unauthorized' }, { status: 401 })
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
 
-  if (!path)
-    return Response.json({ message: 'Missing path param' }, { status: 400 })
+  // if (!path)
+  //   return NextResponse.json({ message: 'Missing path param' }, { status: 400 })
 
   const formData: FormData = await request.formData()
   const s3ImageInfo = []
@@ -59,7 +62,7 @@ export async function POST(request: NextRequest) {
     )
 
     if (!image)
-      return Response.json(
+      return NextResponse.json(
         { message: 'Something went wrong with the upload' },
         { status: 500 },
       )
@@ -69,7 +72,7 @@ export async function POST(request: NextRequest) {
 
   const prisma = new PrismaClient()
   const images = await prisma.image.createMany({
-    skipDuplicates: true,
+    // skipDuplicates: true,
     data: s3ImageInfo.map((image) => ({
       url: s3URLGenerator(s3BucketInfo.bucketName, image.key),
       userId: userId,
