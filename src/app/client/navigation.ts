@@ -13,9 +13,9 @@ export const mainNavItems: NavItem[] = [
     icon: 'generate',
   },
   {
-    href: '/my-photos',
-    name: 'My Photos',
-    icon: 'photos',
+    href: '/dashboard/generated',
+    name: 'Get Generated',
+    icon: 'generate',
   },
 ]
 

@@ -1,17 +1,28 @@
 'use client'
-// import { AddImageToDB } from '@actions/images'
+import { useEffect, useState } from 'react'
 
-import { Image } from '@/db/schema'
+import Image from 'next/image'
 
-interface ImageListProps {
-  images: Image[]
-  // addImageToDB: AddImageToDB
-}
+export const ImageList = () => {
+  const [images, setImages] = useState([])
+  useEffect(() => {
+    const fetchImages = async () => {
+      const res = await fetch('/api/images')
+      const data = await res.json()
+      setImages(data.images)
+    }
+    fetchImages()
+  }, [])
 
-export const ImageList = async ({
-  images, // addImageToDB
-}: ImageListProps) => {
-  console.log('IMAGES', images)
-
-  return <>{/* <button onClick={() => addImageToDB()}>Add To DB</button> */}</>
+  return (
+    <div>
+      <ul className="flex flex-wrap">
+        {images.map((image: {id: string, url:string}, idx) => (
+          <li key={`${image.id}-${idx}`}>
+            <Image src={image.url} width={30} height={30} alt="uploaded image" />
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
 }

@@ -1,18 +1,19 @@
-import { UserButton } from '@clerk/nextjs'
+// import { auth } from '@clerk/nextjs'
 
 import { PageLayout } from '@components/layouts'
-
-// Create a plan
-//
-// Start the new layout
+import { ImageList } from '@/components/ImageList'
+import ImageUpload from '@/components/ImageUpload'
 
 export default async function Generate() {
+  // const result = await fetch(`${process.env.NEXT_PUBLIC_APP}/api/images`)
+  // const data = await result.json()
+
+  // console.log('DATA', data?.images.length)
+
   return (
-    <PageLayout>
-      <h1 className="text-4xl">
-        Here be an introduction to what the hell is going on
-      </h1>
-      <p>This will be like a sumarize dashboard</p>
+    <PageLayout title="Picture app">
+      <ImageUpload />
+      <ImageList />
     </PageLayout>
   )
 }

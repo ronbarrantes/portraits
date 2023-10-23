@@ -2,15 +2,11 @@ import { UserButton } from '@clerk/nextjs'
 
 import { PageLayout } from '@components/layouts'
 
-// MAKE A INIT COMPONENT
-
-// MAKE A CONTENT COMPONENT
-
 export default async function Generate() {
   const images = ['1', '2', '3', '4', '5']
 
   return (
-    <PageLayout>
+    <PageLayout title='Generate image'>
       {/*Add a form with a button and an input*/}
 
       <form className="flex gap-1">

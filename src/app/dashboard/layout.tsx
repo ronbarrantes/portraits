@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <PageLayout>
+      <PageLayout title='Dashboard layout'>
         <NavBar navItems={dashboardNavItems} />
         {children}
       </PageLayout>

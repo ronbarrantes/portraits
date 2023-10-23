@@ -6,9 +6,6 @@
 // })
 
 const nextConfig = {
-  experimental: {
-    serverActions: true,
-  },
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -17,14 +14,11 @@ const nextConfig = {
   },
   swcMinify: true,
 
-  // refer to: https://nextjs.org/docs/app/building-your-application/optimizing/images
   images: {
-    // domains: [`${process.env.AWS_S3_BUCKET_NAME}.s3.amazonaws.com`],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: `**.s3.amazonaws.com`,
-        // pathname: '/**/*',
       },
     ],
   },

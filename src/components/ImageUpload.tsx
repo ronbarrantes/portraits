@@ -1,57 +1,73 @@
 'use client'
 import { revalidatePath } from 'next/cache'
+import Image from 'next/image'
 
 import { extname } from 'path'
 
-import { postImages } from '@/app/actions/images'
-import { Image } from '@/db/schema'
-// import { MAX_FILE_SIZE } from '@/constants/max-file-size'
+// import { postImages } from '@/app/actions/images'
 import { useHandleFileUpload } from '@/hooks/use-handle-file-upload'
 import { fileToBuffer } from '@/utils/file-to-buffer'
 
 interface ImageUploadProps {
   // postImages: PostImages
   // userId: string
-  images: Image[]
+  // images: Image[]
 }
 
-export const ImageUpload = ({}: ImageUploadProps) => {
+export const ImageUpload = () => {
   const { previewImages, selectedFiles, handleFileChange, resetFilesInput } =
     useHandleFileUpload()
 
+  const formData = new FormData()
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    // event.preventDefault()
+    event.preventDefault()
     if (selectedFiles.length > 0) {
       try {
-        let imagesToUpload = await Promise.all(
-          selectedFiles.map(async (file) => {
-            const bufferStr = (await fileToBuffer(file)).toString('base64')
-            console.log('EXT', extname(file.name))
-            return {
-              key: file.name,
-              bufferStr,
-            }
-          }),
+        // let imagesToUpload = await Promise.all(
+        //   selectedFiles.map(async (file) => {
+        //     const bufferStr = (await fileToBuffer(file)).toString('base64')
+        //     // console.log('EXT', extname(file.name))
+        //     return {
+        //       key: file.name,
+        //       bufferStr,
+        //     }
+        //   }),
+        // )
+
+        selectedFiles.forEach((file, idx) => {
+          formData.append(`images-${idx}`, file)
+        })
+
+        // imagesToUpload = imagesToUpload.filter((image) => image.key !== '')
+
+        // console.log('IMAGES TO UPLOAD', imagesToUpload)
+
+        console.log('Images', `${process.env.NEXT_PUBLIC_APP}/api/images`)
+
+        const image = await fetch(
+          `${process.env.NEXT_PUBLIC_APP}/api/images`,
+          {
+            method: 'POST',
+            body: formData,
+          },
+
+          // imagesToUpload
         )
 
-        imagesToUpload = imagesToUpload.filter((image) => image.key !== '')
+        console.log('THE IMAGE STUFF ===>>>', image)
+        console.log('ALL WENT WELL')
 
-        try {
-          console.log('THE IMAGE STUFF ===>>>', imagesToUpload)
-          const image = await postImages(imagesToUpload)
-          console.log('THE IMAGE STUFF ===>>>', image)
-          console.log('ALL WENT WELL')
+        // try {
+        //   // do the fetch post here
 
-          console.log(imagesToUpload)
+        //   // console.log(imagesToUpload)
 
-          revalidatePath('/')
-        } catch (error) {
-          console.log('TOOK A DUMP')
-        }
+        //   revalidatePath('/')
+        // } catch (error) {
+        //   console.log('TOOK A DUMP')
+        // }
 
-        console.log('SUBMITTED_FILES', selectedFiles)
-
-        resetFilesInput()
       } catch (error) {
         // Handle the error from the server
         console.error('Error uploading images:', error)
@@ -62,8 +78,8 @@ export const ImageUpload = ({}: ImageUploadProps) => {
   return (
     <div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <div className="text-2xl">Hello</div>
-        <div>
+          <div className="flex gap-2">
+
           <input
             type="file"
             accept="image/png, image/jpeg, image/jpg"
@@ -84,26 +100,41 @@ export const ImageUpload = ({}: ImageUploadProps) => {
               ? 'Upload images'
               : `${previewImages.length} images ready`}
           </label>
+
+
+
+          {previewImages.length > 0 && (
+<>
+            
+            <button className="p-2 border border-blue-500 rounded-md cursor-pointer" type="submit">Upload</button>
+            <button className="p-2 border border-blue-500 rounded-md cursor-pointer" type="button" onClick={resetFilesInput}>
+              Reset
+            </button>
+  
+</>
+              )
+            
+            
+            }
+
+
         </div>
         {previewImages.length > 0 && (
-          <div>
+          <div className='flex flex-wrap'>
             {previewImages.map((previewImage, index) => (
               <div key={index}>
-                <img
+                <Image
                   src={previewImage}
                   alt={`Preview ${index}`}
                   className="max-w-xs max-h-xs"
+                  width={100}
+                  height={100}
                 />
               </div>
             ))}
           </div>
         )}
-        <div className="flex gap-2">
-          <button type="submit">Upload</button>
-          <button type="button" onClick={resetFilesInput}>
-            Reset
-          </button>
-        </div>
+
       </form>
     </div>
   )
