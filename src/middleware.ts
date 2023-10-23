@@ -23,9 +23,9 @@ export default authMiddleware({
   //   //   return NextResponse.redirect(orgSelection)
   //   // }
   // },
-  // publicRoutes: ['/api'],
+  publicRoutes: ['/api'],
 })
 
 export const config = {
-  matcher: ['/((?!.*\\..*|_next).*)', '/', '/(trpc)(.*)'],
+  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
 }

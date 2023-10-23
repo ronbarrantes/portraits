@@ -8,11 +8,13 @@ export default async function Generate() {
   const result = await fetch('http://localhost:3000/api/images')
   const data = await result.json()
 
+  console.log('DATA', data?.images.length)
+
   return (
     <PageLayout title="Picture app">
       <p>Upload photos</p>
       <ImageUpload />
-      <ImageList />
+      {/* <ImageList /> */}
     </PageLayout>
   )
 }
