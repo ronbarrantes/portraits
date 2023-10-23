@@ -11,6 +11,7 @@ import { s3URLGenerator } from '@/utils/s3-url-generator'
 
 export async function GET(request: NextRequest) {
   const { userId } = auth()
+  // const path = request.nextUrl.searchParams.get('path') || '/'
 
   const prisma = new PrismaClient()
 
@@ -19,6 +20,7 @@ export async function GET(request: NextRequest) {
 
   const images = await prisma.image.findMany()
 
+  // revalidatePath(path)
   return NextResponse.json({ images })
 }
 
@@ -27,7 +29,7 @@ export async function POST(request: NextRequest) {
   const { userId } = auth()
   const client = new S3Client(s3BucketInfo.config)
   // console.log('POST USER ID ---->>>', userId)
-  const path = request.nextUrl.searchParams.get('path') || '/'
+  // const path = request.nextUrl.searchParams.get('path') || '/'
 
   if (!userId)
     return Response.json({ message: 'Unauthorized' }, { status: 401 })
@@ -70,6 +72,6 @@ export async function POST(request: NextRequest) {
     })),
   })
 
-  revalidatePath(path)
+  // revalidatePath(path)
   return Response.json({ message: 'Image uploaded successfully', images })
 }

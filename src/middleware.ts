@@ -24,6 +24,7 @@ export default authMiddleware({
   //   // }
   // },
   publicRoutes: ['/api'],
+  // debug: true,
 })
 
 export const config = {

@@ -40,7 +40,7 @@ export const PageLayout = ({ title, children }: PageLayoutProps) => {
             afterSignOutUrl="/"
           />
         </header>
-        <main className="flex flex-col items-center justify-between w-full gap-5 p-1 border border-green-600">
+        <main className="flex flex-col items-center justify-between w-full gap-5 p-1">
           {children}
         </main>
       </div>

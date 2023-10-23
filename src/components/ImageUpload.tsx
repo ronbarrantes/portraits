@@ -1,5 +1,6 @@
 'use client'
 import { revalidatePath } from 'next/cache'
+import Image from 'next/image'
 
 import { extname } from 'path'
 
@@ -42,8 +43,10 @@ export const ImageUpload = () => {
 
         // console.log('IMAGES TO UPLOAD', imagesToUpload)
 
+        console.log('Images', `${process.env.NEXT_PUBLIC_APP}/api/images`)
+
         const image = await fetch(
-          `${process.env.NEXT_APP}/api/images`,
+          `${process.env.NEXT_PUBLIC_APP}/api/images`,
           {
             method: 'POST',
             body: formData,
@@ -65,7 +68,6 @@ export const ImageUpload = () => {
         //   console.log('TOOK A DUMP')
         // }
 
-        // resetFilesInput()
       } catch (error) {
         // Handle the error from the server
         console.error('Error uploading images:', error)
@@ -76,8 +78,13 @@ export const ImageUpload = () => {
   return (
     <div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <div className="text-2xl">Hello</div>
-        <div>
+          <div className="flex gap-2">
+
+
+
+
+
+
           <input
             type="file"
             accept="image/png, image/jpeg, image/jpg"
@@ -98,26 +105,41 @@ export const ImageUpload = () => {
               ? 'Upload images'
               : `${previewImages.length} images ready`}
           </label>
+
+
+
+          {previewImages.length > 0 && (
+<>
+            
+            <button className="p-2 border border-blue-500 rounded-md cursor-pointer" type="submit">Upload</button>
+            <button className="p-2 border border-blue-500 rounded-md cursor-pointer" type="button" onClick={resetFilesInput}>
+              Reset
+            </button>
+  
+</>
+              )
+            
+            
+            }
+
+
         </div>
         {previewImages.length > 0 && (
-          <div>
+          <div className='flex flex-wrap'>
             {previewImages.map((previewImage, index) => (
               <div key={index}>
-                <img
+                <Image
                   src={previewImage}
                   alt={`Preview ${index}`}
                   className="max-w-xs max-h-xs"
+                  width={100}
+                  height={100}
                 />
               </div>
             ))}
           </div>
         )}
-        <div className="flex gap-2">
-          <button type="submit">Upload</button>
-          <button type="button" onClick={resetFilesInput}>
-            Reset
-          </button>
-        </div>
+
       </form>
     </div>
   )

@@ -4,7 +4,7 @@ export default async function Dashboard() {
   // an array just to show images
   const images = ['1', '2', '3', '4', '5', '1', '2', '3', '4', '5', '1', '2']
 
-  const post = await fetch(`${process.env.NEXT_APP}/api/get-posts`)
+  const post = await fetch(`${process.env.NEXT_PUBLIC_APP}/api/get-posts`)
 
   const data = await post.json()
 
