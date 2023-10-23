@@ -5,7 +5,7 @@ import { ImageList } from '@/components/ImageList'
 import ImageUpload from '@/components/ImageUpload'
 
 export default async function Generate() {
-  const result = await fetch('http://localhost:3000/api/images')
+  const result = await fetch(`${process.env.NEXT_APP}/api/images`)
   const data = await result.json()
 
   console.log('DATA', data?.images.length)
@@ -14,7 +14,7 @@ export default async function Generate() {
     <PageLayout title="Picture app">
       <p>Upload photos</p>
       <ImageUpload />
-      <ImageList />
+      {/* <ImageList /> */}
     </PageLayout>
   )
 }

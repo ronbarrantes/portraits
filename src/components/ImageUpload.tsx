@@ -43,7 +43,7 @@ export const ImageUpload = () => {
         // console.log('IMAGES TO UPLOAD', imagesToUpload)
 
         const image = await fetch(
-          'http://localhost:3000/api/images',
+          `${process.env.NEXT_APP}/api/images`,
           {
             method: 'POST',
             body: formData,
