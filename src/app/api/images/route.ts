@@ -13,21 +13,23 @@ export async function GET(request: NextRequest) {
   const { userId } = auth()
 
   const user = await currentUser()
+  const prisma = new PrismaClient()
 
-  console.log('USER ---->>>', user)
+  console.log('USER ---->>>', user?.id)
 
   if (!userId)
     return Response.json({ message: 'Unauthorized' }, { status: 401 })
 
-  const path = request.nextUrl.searchParams.get('path')
+  // const path = request.nextUrl.searchParams.get('path')
 
-  if (!path)
-    return Response.json({ message: 'Missing path param' }, { status: 400 })
+  // if (!path)
+  //   return Response.json({ message: 'Missing path param' }, { status: 400 })
 
-  const prisma = new PrismaClient()
   const images = await prisma.image.findMany()
 
-  revalidatePath(path)
+  console.log('IMAGES ---->>>', images)
+
+  // revalidatePath(path)
   return NextResponse.json({ message: 'Image uploaded successfully', images })
 }
 
